@@ -1,18 +1,24 @@
 import React from 'react'
-import './styles.css'
+
+import './globals.css'
+import { Background } from '@/components/Background'
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  title: 'Ngày Hội An Lạc - Healing Day',
+  description:
+    'Ngày Hội An Lạc - Healing Day được khởi xướng và tổ chức bởi TS Lê Nguyên Phương và cộng đồng học viên. Đây là chuỗi sự kiện hỗ trợ tâm lý miễn phí dành cho những người đang gặp các khó khăn về sức khỏe tinh thần.',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="en">
+    <html lang="vi">
       <body>
-        <main>{children}</main>
+        <main>
+          <Background />
+          {children}
+        </main>
       </body>
     </html>
   )

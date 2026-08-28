@@ -1,0 +1,316 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@source "../../components";
+@source "../../blocks";
+@source "./";
+
+/* ============================================
+   FONT FACES
+   ============================================ */
+
+/* SVN-Yipes — Primary heading font */
+@font-face {
+  font-family: 'SVN-Yipes Regular';
+  src: url('/fonts/SVN-Yipes.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (Design Tokens)
+   ============================================ */
+
+:root {
+  /* Font families */
+  --font-family-heading: 'SVN-Yipes Regular', 'SVN-Yipes Regular Placeholder', sans-serif;
+  --font-family-body: Inter, 'Inter Placeholder', sans-serif;
+
+  /* NHAL Brand Colors */
+  --nhal-red: #6e1313;
+  --nhal-red-light: #8a1a1a;
+  --nhal-brown: #9c6349;
+  --nhal-gold: #e3b955;
+  --nhal-gold-light: #f0d080;
+  --nhal-coral: #f38370;
+  --nhal-pink: #e973bb;
+  --nhal-purple: #8624ff;
+  --nhal-green: #83ca16;
+  --nhal-dark: #121218;
+  --nhal-dark-subtle: #323239;
+  --nhal-white: #fff;
+  --nhal-cream: #fefefe;
+  --nhal-light-gray: #f5f5f7;
+  --nhal-gray: #94979e;
+  --nhal-text-secondary: #61646b;
+  --nhal-bg-cream: #f7f7f8;
+  --nhal-bg-pattern: #edeef1;
+
+  /* Semantic tokens */
+  --color-primary: #6e1313;
+
+  /* shadcn tokens */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+html {
+  font-size: 18px;
+  line-height: 32px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-family-body);
+  font-size: 18px;
+  line-height: 32px;
+  color: var(--nhal-dark);
+  background-color: var(--nhal-bg-cream);
+
+  /* Tablet */
+  @media (max-width: 1199px) {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  /* Mobile */
+  @media (max-width: 809px) {
+    font-size: 15px;
+    line-height: 24px;
+  }
+}
+
+/* ============================================
+   TAILWIND THEME EXTENSIONS
+   ============================================ */
+
+@theme inline {
+  /* Fonts */
+  --font-heading: var(--font-family-heading);
+  --font-body: var(--font-family-body);
+  --font-sans: var(--font-family-body);
+
+  /* NHAL Brand Colors for Tailwind */
+  --color-nhal-red: var(--nhal-red);
+  --color-nhal-red-light: var(--nhal-red-light);
+  --color-nhal-brown: var(--nhal-brown);
+  --color-nhal-gold: var(--nhal-gold);
+  --color-nhal-gold-light: var(--nhal-gold-light);
+  --color-nhal-coral: var(--nhal-coral);
+  --color-nhal-pink: var(--nhal-pink);
+  --color-nhal-purple: var(--nhal-purple);
+  --color-nhal-green: var(--nhal-green);
+  --color-nhal-dark: var(--nhal-dark);
+  --color-nhal-dark-subtle: var(--nhal-dark-subtle);
+  --color-nhal-white: var(--nhal-white);
+  --color-nhal-cream: var(--nhal-cream);
+  --color-nhal-light-gray: var(--nhal-light-gray);
+  --color-nhal-gray: var(--nhal-gray);
+  --color-nhal-text-secondary: var(--nhal-text-secondary);
+  --color-nhal-bg-cream: var(--nhal-bg-cream);
+  --color-nhal-bg-pattern: var(--nhal-bg-pattern);
+
+  /* Semantic color aliases */
+  --color-brand: var(--color-primary);
+
+  /* shadcn color mappings */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Custom breakpoints matching Framer (1200px, 810px) */
+  --breakpoint-sm: 375px;
+  --breakpoint-md: 810px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1440px;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Section container — max-width with consistent padding */
+.section-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+
+  @media (max-width: 1199px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @media (max-width: 809px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* Rich text styling for Payload CMS content */
+.rich-text {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-family-heading);
+    color: var(--nhal-red);
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  a {
+    color: var(--nhal-red);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+  }
+
+  a:hover {
+    color: var(--nhal-red-light);
+  }
+
+  strong,
+  b {
+    font-weight: 700;
+  }
+
+  em,
+  i {
+    font-style: italic;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-body;
+  }
+}
