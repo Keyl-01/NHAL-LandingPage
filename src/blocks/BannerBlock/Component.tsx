@@ -1,14 +1,12 @@
 import React from 'react'
-import { motion } from 'framer-motion'
-
 import type { BannerBlock as BannerBlockProps } from '@/payload-types'
 import { Media } from '@/components/Media'
 
-export const BannerBlock: React.FC<BannerBlockProps> = ({ banner, href }) => {
+export const BannerBlock: React.FC<BannerBlockProps> = ({ image, href }) => {
   return (
-    <div className="w-full mx-auto h-48">
+    <div className="flex justify-center">
       <a href={href || '#'}>
-        <Media resource={banner} />
+        <Media className="max-w-[1348px]" resource={image} />
       </a>
     </div>
   )

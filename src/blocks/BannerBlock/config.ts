@@ -9,7 +9,7 @@ export const Banner: Block = {
   },
   fields: [
     {
-      name: 'banner',
+      name: 'image',
       type: 'upload',
       relationTo: 'media',
       required: true,

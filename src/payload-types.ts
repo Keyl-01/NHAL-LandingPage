@@ -675,7 +675,7 @@ export interface Home {
  * via the `definition` "BannerBlock".
  */
 export interface BannerBlock {
-  banner: number | Media;
+  image: number | Media;
   href?: string | null;
   id?: string | null;
   blockName?: string | null;
@@ -753,7 +753,7 @@ export interface HomeSelect<T extends boolean = true> {
  * via the `definition` "BannerBlock_select".
  */
 export interface BannerBlockSelect<T extends boolean = true> {
-  banner?: T;
+  image?: T;
   href?: T;
   id?: T;
   blockName?: T;
