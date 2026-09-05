@@ -5,12 +5,14 @@ import { motion } from 'framer-motion'
 
 import type { HeroBlock as HeroBlockProps } from '@/payload-types'
 import { Hero } from './components/Hero'
+import { HeroStory } from './components/HeroStory'
 
 export const HeroBlock: React.FC<HeroBlockProps> = ({
   heroStats,
   headline,
   subtitle,
   primaryCta,
+  heroStory,
 }) => {
   return (
     <section id="nhal-hero-section" className="flex w-full justify-center">
@@ -39,6 +41,20 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({
             subtitle={subtitle}
             primaryCta={primaryCta}
           />
+        </motion.div>
+        <motion.div
+          className="w-full"
+          initial={{ opacity: 0, y: 96, scale: 0 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{
+            type: 'spring',
+            stiffness: 300,
+            damping: 30,
+            mass: 1,
+            delay: 0.5,
+          }}
+        >
+          <HeroStory videoUrl={heroStory?.videoUrl} thumbnail={heroStory?.thumbnail} />
         </motion.div>
       </div>
     </section>

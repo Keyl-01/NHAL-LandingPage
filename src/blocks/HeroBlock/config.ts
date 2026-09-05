@@ -90,5 +90,23 @@ export const Hero: Block = {
         },
       ],
     },
+    {
+      name: 'heroStory',
+      type: 'group',
+      label: 'Hero Story',
+      fields: [
+        {
+          name: 'thumbnail',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Thumbnail',
+        },
+        {
+          name: 'videoUrl',
+          type: 'text',
+          label: 'Video URL (YouTube)',
+        },
+      ],
+    },
   ],
 }

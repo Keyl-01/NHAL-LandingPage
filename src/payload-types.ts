@@ -730,6 +730,10 @@ export interface HeroBlock {
     label?: string | null;
     href?: string | null;
   };
+  heroStory?: {
+    thumbnail?: (number | null) | Media;
+    videoUrl?: string | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero';
@@ -792,6 +796,12 @@ export interface HeroBlockSelect<T extends boolean = true> {
     | {
         label?: T;
         href?: T;
+      };
+  heroStory?:
+    | T
+    | {
+        thumbnail?: T;
+        videoUrl?: T;
       };
   id?: T;
   blockName?: T;

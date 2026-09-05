@@ -54,7 +54,7 @@ export const Hero: React.FC<HeroProps> = ({
       )}
 
       <motion.div
-        className="flex -mt-1"
+        className="flex md:-mt-1"
         initial={{ opacity: 0, y: 96 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -69,10 +69,14 @@ export const Hero: React.FC<HeroProps> = ({
           <Link
             href={primaryCta.href || '#'}
             className="
-            flex justify-center items-center w-[279px] h-[66px] py-2.5 px-4 rounded-full border border-nhal-dark 
+            flex justify-center items-center py-2.5 px-4 rounded-full border border-nhal-dark 
             bg-gradient-to-b from-[rgb(255,179,3)] to-[var(--nhal-gold,rgb(227,185,85))] shadow-[0px_1px_2px_0px_rgba(18,18,24,0.03),0px_2px_4px_0px_rgba(18,18,24,0.05),inset_0px_4px_8px_1px_rgba(255,255,255,0.15)]
             text-[26px] text-nhal-red font-medium leading-6
-            hover:text-white duration-500 ease-in-out
+            hover:text-white transition-colors duration-500 ease-in-out
+
+            w-full h-[66px]
+            md:w-[32%] md:h-[69px]
+            lg:w-[31%] lg:h-[66px]
             "
           >
             {primaryCta.label}
