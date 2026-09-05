@@ -686,6 +686,16 @@ export interface BannerBlock {
  * via the `definition` "HeroBlock".
  */
 export interface HeroBlock {
+  heroStats: {
+    count: string;
+    label: string;
+    avatars?:
+      | {
+          avatar: number | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
   headline: {
     root: {
       type: string;
@@ -763,6 +773,18 @@ export interface BannerBlockSelect<T extends boolean = true> {
  * via the `definition` "HeroBlock_select".
  */
 export interface HeroBlockSelect<T extends boolean = true> {
+  heroStats?:
+    | T
+    | {
+        count?: T;
+        label?: T;
+        avatars?:
+          | T
+          | {
+              avatar?: T;
+              id?: T;
+            };
+      };
   headline?: T;
   subtitle?: T;
   primaryCta?:

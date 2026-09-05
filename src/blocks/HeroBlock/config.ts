@@ -15,6 +15,39 @@ export const Hero: Block = {
   },
   fields: [
     {
+      name: 'heroStats',
+      type: 'group',
+      label: 'Hero Stats',
+      fields: [
+        {
+          name: 'count',
+          type: 'text',
+          label: 'Count',
+          required: true,
+        },
+        {
+          name: 'label',
+          type: 'text',
+          label: 'Label',
+          required: true,
+        },
+        {
+          name: 'avatars',
+          type: 'array',
+          maxRows: 6,
+          fields: [
+            {
+              name: 'avatar',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Avatar',
+              required: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'headline',
       type: 'richText',
       required: true,

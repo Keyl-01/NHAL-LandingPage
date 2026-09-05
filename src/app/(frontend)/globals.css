@@ -15,8 +15,25 @@
 /* SVN-Yipes — Primary heading font */
 @font-face {
   font-family: 'SVN-Yipes Regular';
-  src: url('/fonts/SVN-Yipes.otf') format('opentype');
+  src: url('/fonts/SVN-Yipes-Regular.woff2') format('woff2');
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SVN-Yipes Regular Placeholder';
+  src: local('Arial');
+  ascent-override: 109.85%;
+  descent-override: 31.96%;
+  line-gap-override: 0%;
+  size-adjust: 100.14%;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 300 900;
   font-style: normal;
   font-display: swap;
 }
@@ -28,7 +45,8 @@
 :root {
   /* Font families */
   --font-family-heading: 'SVN-Yipes Regular', 'SVN-Yipes Regular Placeholder', sans-serif;
-  --font-family-body: Inter, 'Inter Placeholder', sans-serif;
+  --font-family-body: 'Inter', sans-serif;
+  --font-family-backquote: Satoshi, 'Satoshi Placeholder', sans-serif;
 
   /* NHAL Brand Colors */
   --nhal-red: #6e1313;
@@ -49,6 +67,7 @@
   --nhal-text-secondary: #61646b;
   --nhal-bg-cream: #f7f7f8;
   --nhal-bg-pattern: #edeef1;
+  --nhal-border-color: #e0e2e6;
 
   /* Semantic tokens */
   --color-primary: #6e1313;
@@ -135,6 +154,7 @@ body {
   --font-heading: var(--font-family-heading);
   --font-body: var(--font-family-body);
   --font-sans: var(--font-family-body);
+  --font-backquote: var(--font-family-backquote);
 
   /* NHAL Brand Colors for Tailwind */
   --color-nhal-red: var(--nhal-red);
