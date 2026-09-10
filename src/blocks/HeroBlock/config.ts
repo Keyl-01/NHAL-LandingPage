@@ -108,5 +108,18 @@ export const Hero: Block = {
         },
       ],
     },
+    {
+      name: 'sponsors',
+      type: 'array',
+      label: 'Sponsors',
+      fields: [
+        {
+          name: 'sponsorLogo',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Sponsor Logo',
+        },
+      ],
+    },
   ],
 }

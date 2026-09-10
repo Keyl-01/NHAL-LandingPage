@@ -734,6 +734,12 @@ export interface HeroBlock {
     thumbnail?: (number | null) | Media;
     videoUrl?: string | null;
   };
+  sponsors?:
+    | {
+        sponsorLogo?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero';
@@ -802,6 +808,12 @@ export interface HeroBlockSelect<T extends boolean = true> {
     | {
         thumbnail?: T;
         videoUrl?: T;
+      };
+  sponsors?:
+    | T
+    | {
+        sponsorLogo?: T;
+        id?: T;
       };
   id?: T;
   blockName?: T;

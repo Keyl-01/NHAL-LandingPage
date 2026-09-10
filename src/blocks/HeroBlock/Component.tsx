@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import type { HeroBlock as HeroBlockProps } from '@/payload-types'
 import { Hero } from './components/Hero'
 import { HeroStory } from './components/HeroStory'
+import { HeroSponsors } from './components/HeroSponsors'
 
 export const HeroBlock: React.FC<HeroBlockProps> = ({
   heroStats,
@@ -13,6 +14,7 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({
   subtitle,
   primaryCta,
   heroStory,
+  sponsors,
 }) => {
   return (
     <section id="nhal-hero-section" className="flex w-full justify-center">
@@ -55,6 +57,20 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({
           }}
         >
           <HeroStory videoUrl={heroStory?.videoUrl} thumbnail={heroStory?.thumbnail} />
+        </motion.div>
+        <motion.div
+          className="flex justify-center w-full"
+          initial={{ opacity: 0, y: 96 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            type: 'spring',
+            stiffness: 400,
+            damping: 30,
+            mass: 1,
+            delay: 0.6,
+          }}
+        >
+          <HeroSponsors sponsors={sponsors} />
         </motion.div>
       </div>
     </section>
