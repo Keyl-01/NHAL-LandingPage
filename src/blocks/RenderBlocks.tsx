@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react'
 import { BannerBlock } from '@/blocks/BannerBlock/Component'
 import { HeroBlock } from '@/blocks/HeroBlock/Component'
+import { AboutBlock } from '@/blocks/AboutBlock/Component'
 
 const blockComponents = {
   banner: BannerBlock,
   hero: HeroBlock,
+  about: AboutBlock,
 }
 
 export const RenderBlocks: React.FC<{

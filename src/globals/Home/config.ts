@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload'
 import { Banner } from '@/blocks/BannerBlock/config'
 import { Hero } from '@/blocks/HeroBlock/config'
+import { About } from '@/blocks/AboutBlock/config'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
 import {
@@ -41,7 +42,7 @@ export const Home: GlobalConfig = {
               name: 'layout',
               type: 'blocks',
               required: true,
-              blocks: [Banner, Hero],
+              blocks: [Banner, Hero, About],
             },
           ],
           label: 'Content',

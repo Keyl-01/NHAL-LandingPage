@@ -656,7 +656,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Home {
   id: number;
-  layout: (BannerBlock | HeroBlock)[];
+  layout: (BannerBlock | HeroBlock | AboutBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -746,6 +746,36 @@ export interface HeroBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutBlock".
+ */
+export interface AboutBlock {
+  simpleBadge: string;
+  content: {
+    title: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    description1?: string | null;
+    description2?: string | null;
+  };
+  aboutImage: number | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'about';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
@@ -754,6 +784,7 @@ export interface HomeSelect<T extends boolean = true> {
     | {
         banner?: T | BannerBlockSelect<T>;
         hero?: T | HeroBlockSelect<T>;
+        about?: T | AboutBlockSelect<T>;
       };
   meta?:
     | T
@@ -815,6 +846,23 @@ export interface HeroBlockSelect<T extends boolean = true> {
         sponsorLogo?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutBlock_select".
+ */
+export interface AboutBlockSelect<T extends boolean = true> {
+  simpleBadge?: T;
+  content?:
+    | T
+    | {
+        title?: T;
+        description1?: T;
+        description2?: T;
+      };
+  aboutImage?: T;
   id?: T;
   blockName?: T;
 }
