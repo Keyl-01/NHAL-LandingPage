@@ -656,7 +656,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Home {
   id: number;
-  layout: (BannerBlock | HeroBlock | AboutBlock)[];
+  layout: (BannerBlock | HeroBlock | AboutBlock | BenefitBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -776,6 +776,45 @@ export interface AboutBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BenefitBlock".
+ */
+export interface BenefitBlock {
+  heading: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  benefitWrappers?:
+    | {
+        benefitCard1: {
+          icon: number | Media;
+          title: string;
+          description: string;
+        };
+        benefitCard2: {
+          icon: number | Media;
+          title: string;
+          description: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'benefit';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
@@ -785,6 +824,7 @@ export interface HomeSelect<T extends boolean = true> {
         banner?: T | BannerBlockSelect<T>;
         hero?: T | HeroBlockSelect<T>;
         about?: T | AboutBlockSelect<T>;
+        benefit?: T | BenefitBlockSelect<T>;
       };
   meta?:
     | T
@@ -863,6 +903,34 @@ export interface AboutBlockSelect<T extends boolean = true> {
         description2?: T;
       };
   aboutImage?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BenefitBlock_select".
+ */
+export interface BenefitBlockSelect<T extends boolean = true> {
+  heading?: T;
+  benefitWrappers?:
+    | T
+    | {
+        benefitCard1?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              description?: T;
+            };
+        benefitCard2?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              description?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
