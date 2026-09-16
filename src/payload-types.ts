@@ -656,7 +656,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Home {
   id: number;
-  layout: (BannerBlock | HeroBlock | AboutBlock | BenefitBlock | ServiceBlock)[];
+  layout: (BannerBlock | HeroBlock | AboutBlock | BenefitBlock | ServiceBlock | MethodologyBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -854,6 +854,46 @@ export interface ServiceBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MethodologyBlock".
+ */
+export interface MethodologyBlock {
+  heading: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  coverImage: number | Media;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'methodology';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
@@ -865,6 +905,7 @@ export interface HomeSelect<T extends boolean = true> {
         about?: T | AboutBlockSelect<T>;
         benefit?: T | BenefitBlockSelect<T>;
         service?: T | ServiceBlockSelect<T>;
+        methodology?: T | MethodologyBlockSelect<T>;
       };
   meta?:
     | T
@@ -997,6 +1038,17 @@ export interface ServiceBlockSelect<T extends boolean = true> {
         isActive?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MethodologyBlock_select".
+ */
+export interface MethodologyBlockSelect<T extends boolean = true> {
+  heading?: T;
+  coverImage?: T;
+  description?: T;
   id?: T;
   blockName?: T;
 }

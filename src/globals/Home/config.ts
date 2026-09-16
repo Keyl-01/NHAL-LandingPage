@@ -4,6 +4,7 @@ import { Hero } from '@/blocks/HeroBlock/config'
 import { About } from '@/blocks/AboutBlock/config'
 import { Benefit } from '@/blocks/BenefitBlock/config'
 import { Service } from '@/blocks/ServiceBlock/config'
+import { Methodology } from '@/blocks/MethodologyBlock/config'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
 import {
@@ -44,7 +45,7 @@ export const Home: GlobalConfig = {
               name: 'layout',
               type: 'blocks',
               required: true,
-              blocks: [Banner, Hero, About, Benefit, Service],
+              blocks: [Banner, Hero, About, Benefit, Service, Methodology],
             },
           ],
           label: 'Content',
