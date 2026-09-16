@@ -656,7 +656,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Home {
   id: number;
-  layout: (BannerBlock | HeroBlock | AboutBlock | BenefitBlock)[];
+  layout: (BannerBlock | HeroBlock | AboutBlock | BenefitBlock | ServiceBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -815,6 +815,45 @@ export interface BenefitBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceBlock".
+ */
+export interface ServiceBlock {
+  imgWrapper: {
+    imgCard1: number | Media;
+    imgCard2: number | Media;
+    imgCard3: number | Media;
+    imgCard4: number | Media;
+    imgCard5: number | Media;
+  };
+  heading: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  serviceCards?:
+    | {
+        cardIcon: number | Media;
+        cardDescription: string;
+        isActive?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'service';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
@@ -825,6 +864,7 @@ export interface HomeSelect<T extends boolean = true> {
         hero?: T | HeroBlockSelect<T>;
         about?: T | AboutBlockSelect<T>;
         benefit?: T | BenefitBlockSelect<T>;
+        service?: T | ServiceBlockSelect<T>;
       };
   meta?:
     | T
@@ -929,6 +969,32 @@ export interface BenefitBlockSelect<T extends boolean = true> {
               title?: T;
               description?: T;
             };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceBlock_select".
+ */
+export interface ServiceBlockSelect<T extends boolean = true> {
+  imgWrapper?:
+    | T
+    | {
+        imgCard1?: T;
+        imgCard2?: T;
+        imgCard3?: T;
+        imgCard4?: T;
+        imgCard5?: T;
+      };
+  heading?: T;
+  serviceCards?:
+    | T
+    | {
+        cardIcon?: T;
+        cardDescription?: T;
+        isActive?: T;
         id?: T;
       };
   id?: T;

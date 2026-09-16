@@ -3,6 +3,7 @@ import { Banner } from '@/blocks/BannerBlock/config'
 import { Hero } from '@/blocks/HeroBlock/config'
 import { About } from '@/blocks/AboutBlock/config'
 import { Benefit } from '@/blocks/BenefitBlock/config'
+import { Service } from '@/blocks/ServiceBlock/config'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
 import {
@@ -43,7 +44,7 @@ export const Home: GlobalConfig = {
               name: 'layout',
               type: 'blocks',
               required: true,
-              blocks: [Banner, Hero, About, Benefit],
+              blocks: [Banner, Hero, About, Benefit, Service],
             },
           ],
           label: 'Content',
