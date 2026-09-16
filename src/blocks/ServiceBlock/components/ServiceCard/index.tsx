@@ -35,8 +35,8 @@ export const ServiceCard = ({ serviceCard, count }: ServiceCardProps) => {
         'flex h-[325px] w-full flex-col items-start justify-between rounded-[22px] p-[28px]',
         isActive ? 'bg-brand-light shadow-[0px_0px_52px_0px_rgba(156,99,73,0.3)]' : 'bg-white',
       )}
-      initial={{ opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 22, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true }}
       transition={{
         ...SPRING_TRANSITION,
