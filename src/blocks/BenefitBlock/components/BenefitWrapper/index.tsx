@@ -10,7 +10,7 @@ type BenefitWrapperProps = {
 
 export const BenefitWrapper: React.FC<BenefitWrapperProps> = ({ benefitCard1, benefitCard2 }) => {
   return (
-    <div className="flex w-full gap-[38px] flex-col md:flex-row items-center justify-center md:gap-[22px] lg:gap-0">
+    <div className="flex w-full py-[18px] gap-[38px] flex-col md:flex-row items-center justify-center md:gap-[22px] lg:gap-0">
       <BenefitCard
         icon={benefitCard1?.icon}
         title={benefitCard1?.title}
