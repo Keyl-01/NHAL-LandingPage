@@ -657,7 +657,15 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Home {
   id: number;
   layout: (
-    BannerBlock | HeroBlock | AboutBlock | BenefitBlock | ServiceBlock | MethodologyBlock | ArchiveBlock | SponsorBlock
+    | BannerBlock
+    | HeroBlock
+    | AboutBlock
+    | BenefitBlock
+    | ServiceBlock
+    | MethodologyBlock
+    | ArchiveBlock
+    | SponsorBlock
+    | FooterBlock
   )[];
   meta?: {
     title?: string | null;
@@ -999,6 +1007,38 @@ export interface SponsorBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FooterBlock".
+ */
+export interface FooterBlock {
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  socialLinks?:
+    | {
+        name: string;
+        link: string;
+        icon: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
@@ -1013,6 +1053,7 @@ export interface HomeSelect<T extends boolean = true> {
         methodology?: T | MethodologyBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         sponsor?: T | SponsorBlockSelect<T>;
+        footer?: T | FooterBlockSelect<T>;
       };
   meta?:
     | T
@@ -1187,6 +1228,23 @@ export interface SponsorBlockSelect<T extends boolean = true> {
         heading?: T;
         description?: T;
         logo?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FooterBlock_select".
+ */
+export interface FooterBlockSelect<T extends boolean = true> {
+  description?: T;
+  socialLinks?:
+    | T
+    | {
+        name?: T;
+        link?: T;
+        icon?: T;
         id?: T;
       };
   id?: T;

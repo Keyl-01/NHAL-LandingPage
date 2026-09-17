@@ -7,6 +7,7 @@ import { Service } from '@/blocks/ServiceBlock/config'
 import { Methodology } from '@/blocks/MethodologyBlock/config'
 import { Archive } from '@/blocks/ArchiveBlock/config'
 import { Sponsor } from '@/blocks/SponsorBlock/config'
+import { Footer } from '@/blocks/FooterBlock/config'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
 import {
@@ -47,7 +48,17 @@ export const Home: GlobalConfig = {
               name: 'layout',
               type: 'blocks',
               required: true,
-              blocks: [Banner, Hero, About, Benefit, Service, Methodology, Archive, Sponsor],
+              blocks: [
+                Banner,
+                Hero,
+                About,
+                Benefit,
+                Service,
+                Methodology,
+                Archive,
+                Sponsor,
+                Footer,
+              ],
             },
           ],
           label: 'Content',
