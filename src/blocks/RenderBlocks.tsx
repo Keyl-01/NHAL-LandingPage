@@ -5,6 +5,7 @@ import { AboutBlock } from '@/blocks/AboutBlock/Component'
 import { BenefitBlock } from '@/blocks/BenefitBlock/Component'
 import { ServiceBlock } from '@/blocks/ServiceBlock/Component'
 import { MethodologyBlock } from '@/blocks/MethodologyBlock/Component'
+import { SponsorBlock } from '@/blocks/SponsorBlock/Component'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 
 const blockComponents = {
@@ -15,6 +16,7 @@ const blockComponents = {
   service: ServiceBlock,
   methodology: MethodologyBlock,
   archive: ArchiveBlock,
+  sponsor: SponsorBlock,
 }
 
 export const RenderBlocks: React.FC<{

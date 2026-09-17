@@ -656,7 +656,9 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Home {
   id: number;
-  layout: (BannerBlock | HeroBlock | AboutBlock | BenefitBlock | ServiceBlock | MethodologyBlock | ArchiveBlock)[];
+  layout: (
+    BannerBlock | HeroBlock | AboutBlock | BenefitBlock | ServiceBlock | MethodologyBlock | ArchiveBlock | SponsorBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -952,6 +954,51 @@ export interface ArchiveBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SponsorBlock".
+ */
+export interface SponsorBlock {
+  sponsors?:
+    | {
+        heading: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        logo: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'sponsor';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
@@ -965,6 +1012,7 @@ export interface HomeSelect<T extends boolean = true> {
         service?: T | ServiceBlockSelect<T>;
         methodology?: T | MethodologyBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
+        sponsor?: T | SponsorBlockSelect<T>;
       };
   meta?:
     | T
@@ -1124,6 +1172,22 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
     | {
         label?: T;
         href?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SponsorBlock_select".
+ */
+export interface SponsorBlockSelect<T extends boolean = true> {
+  sponsors?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        logo?: T;
+        id?: T;
       };
   id?: T;
   blockName?: T;
