@@ -6,6 +6,7 @@ import { BenefitBlock } from '@/blocks/BenefitBlock/Component'
 import { ServiceBlock } from '@/blocks/ServiceBlock/Component'
 import { MethodologyBlock } from '@/blocks/MethodologyBlock/Component'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
+import { GalleryBlock } from '@/blocks/GalleryBlock/Component'
 import { SponsorBlock } from '@/blocks/SponsorBlock/Component'
 import { FooterBlock } from '@/blocks/FooterBlock/Component'
 
@@ -17,6 +18,7 @@ const blockComponents = {
   service: ServiceBlock,
   methodology: MethodologyBlock,
   archive: ArchiveBlock,
+  gallery: GalleryBlock,
   sponsor: SponsorBlock,
   footer: FooterBlock,
 }

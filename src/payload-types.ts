@@ -664,6 +664,7 @@ export interface Home {
     | ServiceBlock
     | MethodologyBlock
     | ArchiveBlock
+    | GalleryBlock
     | SponsorBlock
     | FooterBlock
   )[];
@@ -962,6 +963,21 @@ export interface ArchiveBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock".
+ */
+export interface GalleryBlock {
+  images?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "SponsorBlock".
  */
 export interface SponsorBlock {
@@ -1052,6 +1068,7 @@ export interface HomeSelect<T extends boolean = true> {
         service?: T | ServiceBlockSelect<T>;
         methodology?: T | MethodologyBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
+        gallery?: T | GalleryBlockSelect<T>;
         sponsor?: T | SponsorBlockSelect<T>;
         footer?: T | FooterBlockSelect<T>;
       };
@@ -1213,6 +1230,20 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
     | {
         label?: T;
         href?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock_select".
+ */
+export interface GalleryBlockSelect<T extends boolean = true> {
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
       };
   id?: T;
   blockName?: T;
