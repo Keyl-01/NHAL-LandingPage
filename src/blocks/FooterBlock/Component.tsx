@@ -38,13 +38,15 @@ export const FooterBlock: React.FC<FooterBlockType> = ({ description, socialLink
         <div className="flex w-full flex-col items-center gap-[32px]">
           <div className="flex w-full justify-center items-center gap-[16px] py-[19px]">
             {socialLinks?.map((link) => (
-              <Link key={link?.id} href={link?.link} target="_blank">
-                <Media
-                  className="size-[60px]"
-                  imgClassName="object-contain"
-                  resource={link?.icon}
-                  alt={link?.name}
-                />
+              <Link key={link?.id} href={link?.link || '#'} target="_blank">
+                {link?.icon && (
+                  <Media
+                    className="size-[60px]"
+                    imgClassName="object-contain"
+                    resource={link?.icon}
+                    alt={link?.name}
+                  />
+                )}
               </Link>
             ))}
           </div>
