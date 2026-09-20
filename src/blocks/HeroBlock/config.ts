@@ -48,7 +48,7 @@ export const Hero: Block = {
       ],
     },
     {
-      name: 'headline',
+      name: 'heading',
       type: 'richText',
       required: true,
       editor: lexicalEditor({
@@ -56,10 +56,10 @@ export const Hero: Block = {
           return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
         },
       }),
-      label: 'Headline',
+      label: 'Heading',
     },
     {
-      name: 'subtitle',
+      name: 'subHeading',
       type: 'richText',
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
@@ -71,7 +71,7 @@ export const Hero: Block = {
           ]
         },
       }),
-      label: 'Sub Title',
+      label: 'Sub Heading',
     },
     {
       name: 'primaryCta',

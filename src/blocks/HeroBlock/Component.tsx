@@ -10,8 +10,8 @@ import { HeroSponsors } from './components/HeroSponsors'
 
 export const HeroBlock: React.FC<HeroBlockProps> = ({
   heroStats,
-  headline,
-  subtitle,
+  heading,
+  subHeading,
   primaryCta,
   heroStory,
   sponsors,
@@ -39,8 +39,8 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({
           <Hero
             className="flex flex-col w-full gap-[13px] md:gap-[34px]"
             heroStats={heroStats}
-            headline={headline}
-            subtitle={subtitle}
+            heading={heading}
+            subHeading={subHeading}
             primaryCta={primaryCta}
           />
         </motion.div>

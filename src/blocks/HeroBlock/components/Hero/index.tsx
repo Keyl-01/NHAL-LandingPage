@@ -8,16 +8,16 @@ import Link from 'next/link'
 type HeroProps = {
   className?: string
   heroStats?: HeroBlock['heroStats']
-  headline?: HeroBlock['headline']
-  subtitle?: HeroBlock['subtitle']
+  heading?: HeroBlock['heading']
+  subHeading?: HeroBlock['subHeading']
   primaryCta?: HeroBlock['primaryCta']
 }
 
 export const Hero: React.FC<HeroProps> = ({
   className,
   heroStats,
-  headline,
-  subtitle,
+  heading,
+  subHeading,
   primaryCta,
 }) => {
   return (
@@ -25,9 +25,9 @@ export const Hero: React.FC<HeroProps> = ({
       {heroStats && (
         <HeroStat count={heroStats.count} label={heroStats.label} avatars={heroStats.avatars} />
       )}
-      {headline && (
+      {heading && (
         <RichText
-          data={headline}
+          data={heading}
           className="
           font-heading text-brand font-bold max-w-4xl
 
@@ -42,9 +42,9 @@ export const Hero: React.FC<HeroProps> = ({
         />
       )}
 
-      {subtitle && (
+      {subHeading && (
         <RichText
-          data={subtitle}
+          data={subHeading}
           className="
           text-base 
           text-[17px] leading-[24px] 

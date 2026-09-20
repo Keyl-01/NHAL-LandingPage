@@ -25,9 +25,9 @@ export const About: Block = {
       label: 'Content',
       fields: [
         {
-          name: 'title',
+          name: 'heading',
           type: 'richText',
-          label: 'Title',
+          label: 'Heading',
           required: true,
           editor: lexicalEditor({
             features: ({ rootFeatures }) => {

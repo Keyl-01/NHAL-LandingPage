@@ -53,7 +53,7 @@ export const AboutBlock: React.FC<AboutBlockProps> = ({ simpleBadge, content, ab
               style={{ y: contentY }}
             >
               <RichText
-                data={content?.title}
+                data={content?.heading}
                 className="
                   max-w-[560px] w-full
                   font-heading text-brand-light font-bold text-[36px] leading-[39px]
