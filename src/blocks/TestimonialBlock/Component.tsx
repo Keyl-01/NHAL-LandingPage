@@ -120,8 +120,8 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ heading, tes
     >
       <div
         className={cn(
-          'flex flex-col w-full max-w-[1200px] pt-[64px] px-[16px] pb-[14px] items-center gap-[40px]',
-          'md:gap-[48px] md:px-[24px]',
+          'flex flex-col w-full max-w-[1200px] pt-[64px] px-[16px] items-center gap-[40px]',
+          'md:gap-[48px] md:px-[24px] md:pb-[14px]',
         )}
       >
         <RichText
