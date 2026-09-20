@@ -42,6 +42,28 @@ export default buildConfig({
       ],
     },
   },
+  onInit: async (payload) => {
+    const { PAYLOAD_ADMIN_EMAIL, PAYLOAD_ADMIN_PASSWORD, PAYLOAD_ADMIN_NAME } = process.env
+
+    if (PAYLOAD_ADMIN_EMAIL && PAYLOAD_ADMIN_PASSWORD) {
+      const existingUsers = await payload.find({
+        collection: 'users',
+        limit: 1,
+      })
+
+      if (existingUsers.totalDocs === 0) {
+        await payload.create({
+          collection: 'users',
+          data: {
+            email: PAYLOAD_ADMIN_EMAIL,
+            password: PAYLOAD_ADMIN_PASSWORD,
+            name: PAYLOAD_ADMIN_NAME || 'Admin',
+          },
+        })
+        payload.logger.info(`✨ Default admin user created successfully: ${PAYLOAD_ADMIN_EMAIL}`)
+      }
+    }
+  },
   collections: [Users, Media],
   globals: [Home],
   plugins,
