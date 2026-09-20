@@ -664,6 +664,7 @@ export interface Home {
     | ServiceBlock
     | MethodologyBlock
     | ArchiveBlock
+    | TestimonialBlock
     | GalleryBlock
     | SponsorBlock
     | FooterBlock
@@ -963,6 +964,37 @@ export interface ArchiveBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock".
+ */
+export interface TestimonialBlock {
+  heading: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  testimonials?:
+    | {
+        quote: string;
+        author: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonial';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "GalleryBlock".
  */
 export interface GalleryBlock {
@@ -1068,6 +1100,7 @@ export interface HomeSelect<T extends boolean = true> {
         service?: T | ServiceBlockSelect<T>;
         methodology?: T | MethodologyBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
+        testimonial?: T | TestimonialBlockSelect<T>;
         gallery?: T | GalleryBlockSelect<T>;
         sponsor?: T | SponsorBlockSelect<T>;
         footer?: T | FooterBlockSelect<T>;
@@ -1230,6 +1263,22 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
     | {
         label?: T;
         href?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock_select".
+ */
+export interface TestimonialBlockSelect<T extends boolean = true> {
+  heading?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        id?: T;
       };
   id?: T;
   blockName?: T;

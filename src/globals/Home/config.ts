@@ -6,6 +6,7 @@ import { Benefit } from '@/blocks/BenefitBlock/config'
 import { Service } from '@/blocks/ServiceBlock/config'
 import { Methodology } from '@/blocks/MethodologyBlock/config'
 import { Archive } from '@/blocks/ArchiveBlock/config'
+import { Testimonial } from '@/blocks/TestimonialBlock/config'
 import { Gallery } from '@/blocks/GalleryBlock/config'
 import { Sponsor } from '@/blocks/SponsorBlock/config'
 import { Footer } from '@/blocks/FooterBlock/config'
@@ -57,6 +58,7 @@ export const Home: GlobalConfig = {
                 Service,
                 Methodology,
                 Archive,
+                Testimonial,
                 Gallery,
                 Sponsor,
                 Footer,

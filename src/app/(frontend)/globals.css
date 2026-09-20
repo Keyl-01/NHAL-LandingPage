@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
@@ -38,6 +39,8 @@
   font-display: swap;
 }
 
+/* Allura — Script/handwriting font (loaded from Google Fonts) */
+
 /* ============================================
    CSS CUSTOM PROPERTIES (Design Tokens)
    ============================================ */
@@ -47,6 +50,7 @@
   --font-family-heading: 'SVN-Yipes Regular', 'SVN-Yipes Regular Placeholder', sans-serif;
   --font-family-body: 'Inter', sans-serif;
   --font-family-backquote: Satoshi, 'Satoshi Placeholder', sans-serif;
+  --font-family-script: 'Allura', sans-serif;
 
   /* NHAL Brand Colors */
   --nhal-red: #6e1313;
@@ -158,6 +162,7 @@ body {
   --font-body: var(--font-family-body);
   --font-sans: var(--font-family-body);
   --font-backquote: var(--font-family-backquote);
+  --font-script: var(--font-family-script);
 
   /* NHAL Brand Colors for Tailwind */
   --color-nhal-red: var(--nhal-red);
