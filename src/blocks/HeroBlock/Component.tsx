@@ -9,6 +9,7 @@ import { HeroStory } from './components/HeroStory'
 import { HeroSponsors } from './components/HeroSponsors'
 
 export const HeroBlock: React.FC<HeroBlockProps> = ({
+  anchorId,
   heroStats,
   heading,
   subHeading,
@@ -17,7 +18,7 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({
   sponsors,
 }) => {
   return (
-    <section id="nhal-hero-section" className="flex w-full justify-center">
+    <section id={anchorId || "nhal-hero-section"} className="flex w-full justify-center">
       <div
         className="
       flex flex-col w-full max-w-[1200px] gap-[82px] items-center py-[27px] px-[16px]

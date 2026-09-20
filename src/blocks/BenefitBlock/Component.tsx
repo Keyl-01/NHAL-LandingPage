@@ -7,10 +7,10 @@ import type { BenefitBlock as BenefitBlockProps } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { BenefitWrapper } from './components/BenefitWrapper'
 
-export const BenefitBlock: React.FC<BenefitBlockProps> = ({ heading, benefitWrappers }) => {
+export const BenefitBlock: React.FC<BenefitBlockProps> = ({ anchorId, heading, benefitWrappers }) => {
   return (
     <motion.section
-      id="nhal-benefit-section"
+      id={anchorId || "nhal-benefit-section"}
       className="flex justify-center items-center w-full"
       initial={{ opacity: 0, y: 96 }}
       animate={{ opacity: 1, y: 0 }}

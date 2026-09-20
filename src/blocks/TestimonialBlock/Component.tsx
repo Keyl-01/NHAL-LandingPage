@@ -80,7 +80,7 @@ function TestimonialSlide({
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
-export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ heading, testimonials }) => {
+export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ anchorId, heading, testimonials }) => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const sectionY = useScrollReveal(sectionRef)
 
@@ -106,7 +106,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ heading, tes
 
   return (
     <motion.section
-      id="nhal-testimonial-section"
+      id={anchorId || "nhal-testimonial-section"}
       className="flex w-full justify-center"
       initial={{ opacity: 0, y: 96 }}
       animate={{ opacity: 1, y: 0 }}

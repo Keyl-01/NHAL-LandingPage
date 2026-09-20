@@ -7,13 +7,14 @@ import { ImageWrapper } from './components/ImageWrapper'
 import { ServiceCard } from './components/ServiceCard'
 
 export const ServiceBlock: React.FC<ServiceBlockProps> = ({
+  anchorId,
   imgWrapper,
   heading,
   serviceCards,
 }) => {
   return (
     <motion.section
-      id="nhal-service-section"
+      id={anchorId || "nhal-service-section"}
       className="flex justify-center items-center w-full"
       initial={{ opacity: 0, y: 96 }}
       animate={{ opacity: 1, y: 0 }}

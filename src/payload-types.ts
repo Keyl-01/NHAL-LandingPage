@@ -195,64 +195,6 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    square?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    small?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    medium?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    large?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    xlarge?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    og?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -492,80 +434,6 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
-  sizes?:
-    | T
-    | {
-        thumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        square?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        small?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        medium?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        large?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        xlarge?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        og?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -668,6 +536,7 @@ export interface Home {
     | GalleryBlock
     | SponsorBlock
     | FooterBlock
+    | NavFlyoutBlock
   )[];
   meta?: {
     title?: string | null;
@@ -687,6 +556,10 @@ export interface Home {
  * via the `definition` "BannerBlock".
  */
 export interface BannerBlock {
+  /**
+   * Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-banner-section
+   */
+  anchorId?: string | null;
   image: number | Media;
   href?: string | null;
   id?: string | null;
@@ -698,6 +571,10 @@ export interface BannerBlock {
  * via the `definition` "HeroBlock".
  */
 export interface HeroBlock {
+  /**
+   * Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-hero-section
+   */
+  anchorId?: string | null;
   heroStats: {
     count: string;
     label: string;
@@ -708,7 +585,7 @@ export interface HeroBlock {
         }[]
       | null;
   };
-  headline: {
+  heading: {
     root: {
       type: string;
       children: {
@@ -723,7 +600,7 @@ export interface HeroBlock {
     };
     [k: string]: unknown;
   };
-  subtitle?: {
+  subHeading?: {
     root: {
       type: string;
       children: {
@@ -761,9 +638,13 @@ export interface HeroBlock {
  * via the `definition` "AboutBlock".
  */
 export interface AboutBlock {
+  /**
+   * Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-about-section
+   */
+  anchorId?: string | null;
   simpleBadge: string;
   content: {
-    title: {
+    heading: {
       root: {
         type: string;
         children: {
@@ -791,6 +672,10 @@ export interface AboutBlock {
  * via the `definition` "BenefitBlock".
  */
 export interface BenefitBlock {
+  /**
+   * Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-benefit-section
+   */
+  anchorId?: string | null;
   heading: {
     root: {
       type: string;
@@ -830,6 +715,10 @@ export interface BenefitBlock {
  * via the `definition` "ServiceBlock".
  */
 export interface ServiceBlock {
+  /**
+   * Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-service-section
+   */
+  anchorId?: string | null;
   imgWrapper: {
     imgCard1: number | Media;
     imgCard2: number | Media;
@@ -869,6 +758,10 @@ export interface ServiceBlock {
  * via the `definition` "MethodologyBlock".
  */
 export interface MethodologyBlock {
+  /**
+   * Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-methodology-section
+   */
+  anchorId?: string | null;
   heading: {
     root: {
       type: string;
@@ -909,6 +802,10 @@ export interface MethodologyBlock {
  * via the `definition` "ArchiveBlock".
  */
 export interface ArchiveBlock {
+  /**
+   * Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-archive-section
+   */
+  anchorId?: string | null;
   heading: {
     root: {
       type: string;
@@ -967,6 +864,10 @@ export interface ArchiveBlock {
  * via the `definition` "TestimonialBlock".
  */
 export interface TestimonialBlock {
+  /**
+   * Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-testimonial-section
+   */
+  anchorId?: string | null;
   heading: {
     root: {
       type: string;
@@ -998,6 +899,10 @@ export interface TestimonialBlock {
  * via the `definition` "GalleryBlock".
  */
 export interface GalleryBlock {
+  /**
+   * Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-gallery-section
+   */
+  anchorId?: string | null;
   images?:
     | {
         image: number | Media;
@@ -1013,6 +918,10 @@ export interface GalleryBlock {
  * via the `definition` "SponsorBlock".
  */
 export interface SponsorBlock {
+  /**
+   * Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-sponsors-section
+   */
+  anchorId?: string | null;
   sponsors?:
     | {
         heading: {
@@ -1058,6 +967,10 @@ export interface SponsorBlock {
  * via the `definition` "FooterBlock".
  */
 export interface FooterBlock {
+  /**
+   * Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-footer-section
+   */
+  anchorId?: string | null;
   description: {
     root: {
       type: string;
@@ -1087,6 +1000,25 @@ export interface FooterBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NavFlyoutBlock".
+ */
+export interface NavFlyoutBlock {
+  navItems?:
+    | {
+        label: string;
+        /**
+         * Nhập chính xác Anchor ID của phân cảnh mà bạn muốn màn hình tự động cuộn tới khi click (ví dụ: nhal-hero-section)
+         */
+        targetAnchor: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'nav-flyout';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
@@ -1104,6 +1036,7 @@ export interface HomeSelect<T extends boolean = true> {
         gallery?: T | GalleryBlockSelect<T>;
         sponsor?: T | SponsorBlockSelect<T>;
         footer?: T | FooterBlockSelect<T>;
+        'nav-flyout'?: T | NavFlyoutBlockSelect<T>;
       };
   meta?:
     | T
@@ -1123,6 +1056,7 @@ export interface HomeSelect<T extends boolean = true> {
  * via the `definition` "BannerBlock_select".
  */
 export interface BannerBlockSelect<T extends boolean = true> {
+  anchorId?: T;
   image?: T;
   href?: T;
   id?: T;
@@ -1133,6 +1067,7 @@ export interface BannerBlockSelect<T extends boolean = true> {
  * via the `definition` "HeroBlock_select".
  */
 export interface HeroBlockSelect<T extends boolean = true> {
+  anchorId?: T;
   heroStats?:
     | T
     | {
@@ -1145,8 +1080,8 @@ export interface HeroBlockSelect<T extends boolean = true> {
               id?: T;
             };
       };
-  headline?: T;
-  subtitle?: T;
+  heading?: T;
+  subHeading?: T;
   primaryCta?:
     | T
     | {
@@ -1173,11 +1108,12 @@ export interface HeroBlockSelect<T extends boolean = true> {
  * via the `definition` "AboutBlock_select".
  */
 export interface AboutBlockSelect<T extends boolean = true> {
+  anchorId?: T;
   simpleBadge?: T;
   content?:
     | T
     | {
-        title?: T;
+        heading?: T;
         description1?: T;
         description2?: T;
       };
@@ -1190,6 +1126,7 @@ export interface AboutBlockSelect<T extends boolean = true> {
  * via the `definition` "BenefitBlock_select".
  */
 export interface BenefitBlockSelect<T extends boolean = true> {
+  anchorId?: T;
   heading?: T;
   benefitWrappers?:
     | T
@@ -1218,6 +1155,7 @@ export interface BenefitBlockSelect<T extends boolean = true> {
  * via the `definition` "ServiceBlock_select".
  */
 export interface ServiceBlockSelect<T extends boolean = true> {
+  anchorId?: T;
   imgWrapper?:
     | T
     | {
@@ -1244,6 +1182,7 @@ export interface ServiceBlockSelect<T extends boolean = true> {
  * via the `definition` "MethodologyBlock_select".
  */
 export interface MethodologyBlockSelect<T extends boolean = true> {
+  anchorId?: T;
   heading?: T;
   coverImage?: T;
   description?: T;
@@ -1255,6 +1194,7 @@ export interface MethodologyBlockSelect<T extends boolean = true> {
  * via the `definition` "ArchiveBlock_select".
  */
 export interface ArchiveBlockSelect<T extends boolean = true> {
+  anchorId?: T;
   heading?: T;
   description?: T;
   importantDescription?: T;
@@ -1272,6 +1212,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
  * via the `definition` "TestimonialBlock_select".
  */
 export interface TestimonialBlockSelect<T extends boolean = true> {
+  anchorId?: T;
   heading?: T;
   testimonials?:
     | T
@@ -1288,6 +1229,7 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
  * via the `definition` "GalleryBlock_select".
  */
 export interface GalleryBlockSelect<T extends boolean = true> {
+  anchorId?: T;
   images?:
     | T
     | {
@@ -1302,6 +1244,7 @@ export interface GalleryBlockSelect<T extends boolean = true> {
  * via the `definition` "SponsorBlock_select".
  */
 export interface SponsorBlockSelect<T extends boolean = true> {
+  anchorId?: T;
   sponsors?:
     | T
     | {
@@ -1318,6 +1261,7 @@ export interface SponsorBlockSelect<T extends boolean = true> {
  * via the `definition` "FooterBlock_select".
  */
 export interface FooterBlockSelect<T extends boolean = true> {
+  anchorId?: T;
   description?: T;
   socialLinks?:
     | T
@@ -1325,6 +1269,21 @@ export interface FooterBlockSelect<T extends boolean = true> {
         name?: T;
         link?: T;
         icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NavFlyoutBlock_select".
+ */
+export interface NavFlyoutBlockSelect<T extends boolean = true> {
+  navItems?:
+    | T
+    | {
+        label?: T;
+        targetAnchor?: T;
         id?: T;
       };
   id?: T;

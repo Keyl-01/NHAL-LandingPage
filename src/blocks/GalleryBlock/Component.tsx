@@ -22,7 +22,7 @@ const GalleryItem = memo(({ imageItem }: { imageItem: ImageType }) => {
 })
 GalleryItem.displayName = 'GalleryItem'
 
-export const GalleryBlock: React.FC<GalleryBlockType> = ({ images }) => {
+export const GalleryBlock: React.FC<GalleryBlockType> = ({ anchorId, images }) => {
   if (!images || images.length === 0) return null
 
   // Đảm bảo có đủ số lượng ảnh để chạy vòng lặp mượt mà (slider không bị hụt ở đuôi)
@@ -77,7 +77,7 @@ export const GalleryBlock: React.FC<GalleryBlockType> = ({ images }) => {
 
   return (
     <section
-      id="nhal-gallery-section"
+      id={anchorId || "nhal-gallery-section"}
       className="flex w-full flex-col items-center justify-center overflow-hidden"
     >
       <div

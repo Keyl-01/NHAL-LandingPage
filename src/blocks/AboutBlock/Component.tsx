@@ -18,7 +18,7 @@ const SECTION_ENTRANCE = {
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
-export const AboutBlock: React.FC<AboutBlockProps> = ({ simpleBadge, content, aboutImage }) => {
+export const AboutBlock: React.FC<AboutBlockProps> = ({ anchorId, simpleBadge, content, aboutImage }) => {
   const badgeRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const imageRef = useRef<HTMLDivElement>(null)
@@ -29,7 +29,7 @@ export const AboutBlock: React.FC<AboutBlockProps> = ({ simpleBadge, content, ab
 
   return (
     <motion.section
-      id="nhal-about-section"
+      id={anchorId || "nhal-about-section"}
       className="flex w-full justify-center"
       {...SECTION_ENTRANCE}
     >

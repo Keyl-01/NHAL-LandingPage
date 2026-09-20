@@ -21,6 +21,7 @@ const SPRING_TRANSITION: Transition = {
 }
 
 export const ArchiveBlock: React.FC<ArchiveBlockProp> = ({
+  anchorId,
   heading,
   description,
   importantDescription,
@@ -28,7 +29,7 @@ export const ArchiveBlock: React.FC<ArchiveBlockProp> = ({
 }) => {
   return (
     <motion.section
-      id="nhal-archive-section"
+      id={anchorId || "nhal-archive-section"}
       className="relative flex w-full justify-center overflow-x-clip"
       {...SECTION_ENTRANCE}
     >

@@ -10,6 +10,7 @@ import { Testimonial } from '@/blocks/TestimonialBlock/config'
 import { Gallery } from '@/blocks/GalleryBlock/config'
 import { Sponsor } from '@/blocks/SponsorBlock/config'
 import { Footer } from '@/blocks/FooterBlock/config'
+import { NavFlyout } from '@/blocks/NavFlyoutBlock/config'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 
 import {
@@ -62,6 +63,7 @@ export const Home: GlobalConfig = {
                 Gallery,
                 Sponsor,
                 Footer,
+                NavFlyout,
               ],
             },
           ],

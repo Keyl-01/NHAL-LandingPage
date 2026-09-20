@@ -9,6 +9,15 @@ export const Gallery: Block = {
   },
   fields: [
     {
+      name: 'anchorId',
+      type: 'text',
+      label: 'Anchor ID',
+      admin: {
+        placeholder: 'nhal-gallery-section',
+        description: 'Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-gallery-section',
+      },
+    },
+    {
       name: 'images',
       type: 'array',
       label: 'Images',

@@ -96,12 +96,12 @@ const SponsorItem = memo(({ sponsor }: { sponsor: SponsorType }) => {
 })
 SponsorItem.displayName = 'SponsorItem'
 
-export const SponsorBlock: React.FC<SponsorBlockType> = ({ sponsors }) => {
+export const SponsorBlock: React.FC<SponsorBlockType> = ({ anchorId, sponsors }) => {
   if (!sponsors || sponsors.length === 0) return null
 
   return (
     <section
-      id="nhal-sponsors-section"
+      id={anchorId || "nhal-sponsors-section"}
       className="flex flex-col w-full items-center justify-center py-[82px] gap-[82px] overflow-hidden"
     >
       {sponsors.map((sponsor, index) => (

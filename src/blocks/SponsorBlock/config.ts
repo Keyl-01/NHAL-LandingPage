@@ -15,6 +15,15 @@ export const Sponsor: Block = {
   },
   fields: [
     {
+      name: 'anchorId',
+      type: 'text',
+      label: 'Anchor ID',
+      admin: {
+        placeholder: 'nhal-sponsors-section',
+        description: 'Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-sponsors-section',
+      },
+    },
+    {
       name: 'sponsors',
       type: 'array',
       label: 'Sponsors',

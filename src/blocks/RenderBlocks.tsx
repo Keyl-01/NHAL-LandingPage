@@ -10,6 +10,7 @@ import { TestimonialBlock } from '@/blocks/TestimonialBlock/Component'
 import { GalleryBlock } from '@/blocks/GalleryBlock/Component'
 import { SponsorBlock } from '@/blocks/SponsorBlock/Component'
 import { FooterBlock } from '@/blocks/FooterBlock/Component'
+import { NavFlyoutBlock } from '@/blocks/NavFlyoutBlock/Component'
 
 const blockComponents = {
   banner: BannerBlock,
@@ -23,6 +24,7 @@ const blockComponents = {
   gallery: GalleryBlock,
   sponsor: SponsorBlock,
   footer: FooterBlock,
+  'nav-flyout': NavFlyoutBlock,
 }
 
 export const RenderBlocks: React.FC<{

@@ -39,6 +39,15 @@ export const Service: Block = {
   },
   fields: [
     {
+      name: 'anchorId',
+      type: 'text',
+      label: 'Anchor ID',
+      admin: {
+        placeholder: 'nhal-service-section',
+        description: 'Tự đặt một tên (viết liền, không dấu) để làm mốc cho phân cảnh này. Dùng tên này nhập vào Nav Flyout để trang cuộn tới đây. Nếu để trống, sẽ dùng mặc định: nhal-service-section',
+      },
+    },
+    {
       name: 'imgWrapper',
       type: 'group',
       label: 'Image Wrapper',

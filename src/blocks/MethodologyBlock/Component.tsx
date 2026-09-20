@@ -20,13 +20,14 @@ const VIEWPORT_CONFIG = {
 }
 
 export const MethodologyBlock: React.FC<MethodologyBlockProp> = ({
+  anchorId,
   heading,
   description,
   coverImage,
 }) => {
   return (
     <section
-      id="nhal-methodology-section"
+      id={anchorId || "nhal-methodology-section"}
       className={cn('flex w-full items-center justify-center overflow-hidden', 'md:px-[25px]')}
     >
       <div className="flex w-full max-w-[1200px] flex-col gap-[52px] px-[20px] py-[82px]">

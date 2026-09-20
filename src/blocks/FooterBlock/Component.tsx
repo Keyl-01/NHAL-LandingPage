@@ -8,9 +8,10 @@ import { cn } from '@/utilities/ui'
 import Link from 'next/link'
 import { Media } from '@/components/Media'
 
-export const FooterBlock: React.FC<FooterBlockType> = ({ description, socialLinks }) => {
+export const FooterBlock: React.FC<FooterBlockType> = ({ anchorId, description, socialLinks }) => {
   return (
     <motion.footer
+      id={anchorId || "nhal-footer-section"}
       className="relative flex w-full overflow-hidden"
       initial={{ opacity: 0, y: 96 }}
       animate={{ opacity: 1, y: 0 }}

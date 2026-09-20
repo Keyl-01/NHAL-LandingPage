@@ -3,9 +3,9 @@ import type { BannerBlock as BannerBlockProps } from '@/payload-types'
 import { Media } from '@/components/Media'
 import Link from 'next/link'
 
-export const BannerBlock: React.FC<BannerBlockProps> = ({ image, href }) => {
+export const BannerBlock: React.FC<BannerBlockProps> = ({ anchorId, image, href }) => {
   return (
-    <div className="flex justify-center">
+    <div id={anchorId || "nhal-banner-section"} className="flex justify-center">
       <Link href={href || '#'}>
         <Media
           className="max-w-[1348px]"
