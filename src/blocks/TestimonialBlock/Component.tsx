@@ -133,7 +133,10 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ heading, tes
         />
 
         {/* Slideshow */}
-        <div ref={sectionRef} className="flex w-full max-w-[920px] items-center px-[24px]">
+        <div
+          ref={sectionRef}
+          className="flex w-full max-w-[920px] items-center px-[24px] md:px-[64px] lg:px-[24px]"
+        >
           <motion.div className="w-full" style={{ y: sectionY }}>
             <Carousel
               opts={{
@@ -165,11 +168,10 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ heading, tes
                 size="icon"
                 className={cn(
                   'hidden md:flex items-center justify-center cursor-pointer',
-                  'text-white [&_svg]:!size-[30px] [&_svg]:stroke-[1.7]',
+                  '!text-white hover:!text-white [&_svg]:!size-[30px] [&_svg]:stroke-[1.7]',
                   'opacity-0 group-hover:opacity-100 transition-opacity duration-200',
-                  '!w-[40px] !h-[40px] !rounded-full !bg-[rgba(18,18,24,0.2)] !border-none',
+                  '!w-[40px] !h-[40px] !rounded-full !bg-[rgba(18,18,24,0.2)] hover:!bg-[rgba(18,18,24,0.2)] !border-none',
                   '!inset-y-auto !top-1/2 !-translate-y-1/2',
-                  'hover:!bg-[rgba(18,18,24,0.3)]',
                 )}
               />
               <CarouselNext
@@ -177,11 +179,10 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ heading, tes
                 size="icon"
                 className={cn(
                   'hidden md:flex items-center justify-center cursor-pointer',
-                  'text-white [&_svg]:!size-[30px] [&_svg]:stroke-[1.7]',
+                  '!text-white hover:!text-white [&_svg]:!size-[30px] [&_svg]:stroke-[1.7]',
                   'opacity-0 group-hover:opacity-100 transition-opacity duration-200',
-                  '!w-[40px] !h-[40px] !rounded-full !bg-[rgba(18,18,24,0.2)] !border-none',
+                  '!w-[40px] !h-[40px] !rounded-full !bg-[rgba(18,18,24,0.2)] hover:!bg-[rgba(18,18,24,0.2)] !border-none',
                   '!inset-y-auto !top-1/2 !-translate-y-1/2',
-                  'hover:!bg-[rgba(18,18,24,0.3)]',
                 )}
               />
             </Carousel>
