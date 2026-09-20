@@ -82,13 +82,11 @@ const SponsorItem = memo(({ sponsor }: { sponsor: SponsorType }) => {
           viewport={{ once: true, amount: 0.4 }}
           variants={logoVariants}
         >
-          {sponsor.logo && (
-            <Media
-              resource={sponsor.logo}
-              className="w-full h-min justify-self-center"
-              imgClassName="w-full h-[420px] object-contain rounded-[38px] md:h-[439px] lg:h-[742px]"
-            />
-          )}
+          <Media
+            resource={sponsor.logo}
+            className="w-full h-min justify-self-center"
+            imgClassName="w-full h-[420px] object-contain rounded-[38px] md:h-[439px] lg:h-[742px]"
+          />
         </motion.div>
       </div>
     </div>
@@ -101,7 +99,7 @@ export const SponsorBlock: React.FC<SponsorBlockType> = ({ anchorId, sponsors })
 
   return (
     <section
-      id={anchorId || "nhal-sponsors-section"}
+      id={anchorId || 'nhal-sponsors-section'}
       className="flex flex-col w-full items-center justify-center py-[82px] gap-[82px] overflow-hidden"
     >
       {sponsors.map((sponsor, index) => (

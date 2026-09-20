@@ -18,7 +18,12 @@ const SECTION_ENTRANCE = {
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
-export const AboutBlock: React.FC<AboutBlockProps> = ({ anchorId, simpleBadge, content, aboutImage }) => {
+export const AboutBlock: React.FC<AboutBlockProps> = ({
+  anchorId,
+  simpleBadge,
+  content,
+  aboutImage,
+}) => {
   const badgeRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const imageRef = useRef<HTMLDivElement>(null)
@@ -29,7 +34,7 @@ export const AboutBlock: React.FC<AboutBlockProps> = ({ anchorId, simpleBadge, c
 
   return (
     <motion.section
-      id={anchorId || "nhal-about-section"}
+      id={anchorId || 'nhal-about-section'}
       className="flex w-full justify-center"
       {...SECTION_ENTRANCE}
     >
@@ -70,17 +75,15 @@ export const AboutBlock: React.FC<AboutBlockProps> = ({ anchorId, simpleBadge, c
           </div>
 
           {/* Image Column */}
-          {aboutImage && (
-            <div ref={imageRef} className="relative w-full aspect-[404/412]">
-              <motion.div className="w-full h-full" style={{ y: imageY }}>
-                <Media
-                  className="w-full h-full overflow-hidden rounded-[71px]"
-                  imgClassName="object-cover w-full h-full"
-                  resource={aboutImage}
-                />
-              </motion.div>
-            </div>
-          )}
+          <div ref={imageRef} className="relative w-full aspect-[404/412]">
+            <motion.div className="w-full h-full" style={{ y: imageY }}>
+              <Media
+                className="w-full h-full overflow-hidden rounded-[71px]"
+                imgClassName="object-cover w-full h-full"
+                resource={aboutImage}
+              />
+            </motion.div>
+          </div>
         </div>
       </div>
     </motion.section>

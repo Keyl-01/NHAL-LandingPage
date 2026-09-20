@@ -12,6 +12,7 @@ import { Sponsor } from '@/blocks/SponsorBlock/config'
 import { Footer } from '@/blocks/FooterBlock/config'
 import { NavFlyout } from '@/blocks/NavFlyoutBlock/config'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
+import { defaultHomeLayout } from './defaultLayout'
 
 import {
   MetaDescriptionField,
@@ -51,6 +52,7 @@ export const Home: GlobalConfig = {
               name: 'layout',
               type: 'blocks',
               required: true,
+              defaultValue: defaultHomeLayout,
               blocks: [
                 Banner,
                 Hero,
