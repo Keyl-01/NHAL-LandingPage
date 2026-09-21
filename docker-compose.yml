@@ -4,6 +4,13 @@
 # All ports bind to 127.0.0.1 — put a reverse proxy (Caddy/Nginx) in front of the app
 # and reach pgAdmin / Postgres through an SSH tunnel.
 
+# Rotate container logs so they can't fill the VPS disk (max ~30MB per service)
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: '10m'
+    max-file: '3'
+
 services:
   payload:
     build:
@@ -12,6 +19,7 @@ services:
         NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL:?set NEXT_PUBLIC_SERVER_URL in .env}
     image: nhal-landingpage:latest
     restart: unless-stopped
+    logging: *logging
     depends_on:
       postgres:
         condition: service_healthy
@@ -23,6 +31,13 @@ services:
       PAYLOAD_ADMIN_EMAIL: ${PAYLOAD_ADMIN_EMAIL:-}
       PAYLOAD_ADMIN_PASSWORD: ${PAYLOAD_ADMIN_PASSWORD:-}
       PAYLOAD_ADMIN_NAME: ${PAYLOAD_ADMIN_NAME:-Admin}
+      # Optional: leave SMTP_HOST empty to log emails to the console instead
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM_ADDRESS: ${SMTP_FROM_ADDRESS:-}
+      SMTP_FROM_NAME: ${SMTP_FROM_NAME:-}
     volumes:
       - media:/app/media
     ports:
@@ -31,6 +46,7 @@ services:
   postgres:
     image: postgres:17-alpine
     restart: unless-stopped
+    logging: *logging
     environment:
       POSTGRES_USER: ${POSTGRES_USER:?set POSTGRES_USER in .env}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
@@ -50,6 +66,7 @@ services:
     image: dpage/pgadmin4:9
     profiles: ['tools']
     restart: unless-stopped
+    logging: *logging
     depends_on:
       - postgres
     environment:
