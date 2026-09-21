@@ -22,9 +22,6 @@ const createLexicalText = (text: string | string[]) => {
   }
 }
 
-// Dùng cho các trường RichText không muốn điền nội dung sẵn
-const emptyLexical = createLexicalText('')
-
 export const defaultHomeLayout = [
   {
     blockType: 'banner',

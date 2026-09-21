@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import type { Home } from '@/payload-types'
 import { BannerBlock } from '@/blocks/BannerBlock/Component'
 import { HeroBlock } from '@/blocks/HeroBlock/Component'
 import { AboutBlock } from '@/blocks/AboutBlock/Component'
@@ -27,8 +28,10 @@ const blockComponents = {
   'nav-flyout': NavFlyoutBlock,
 }
 
+type LayoutBlock = Home['layout'][number]
+
 export const RenderBlocks: React.FC<{
-  blocks: any[]
+  blocks: Home['layout'] | null | undefined
 }> = (props) => {
   const { blocks } = props
 
@@ -38,10 +41,11 @@ export const RenderBlocks: React.FC<{
     return (
       <Fragment>
         {blocks.map((block, index) => {
-          const Block = blockComponents[block.blockType as keyof typeof blockComponents]
+          // Each blockType maps to the component for that exact block shape
+          const Block = blockComponents[block.blockType] as React.FC<LayoutBlock> | undefined
 
           if (Block) {
-            return <Block key={index} {...block} disableInnerContainer />
+            return <Block key={block.id ?? index} {...block} />
           }
 
           return null

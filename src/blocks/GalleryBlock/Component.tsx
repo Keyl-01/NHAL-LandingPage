@@ -23,14 +23,6 @@ const GalleryItem = memo(({ imageItem }: { imageItem: ImageType }) => {
 GalleryItem.displayName = 'GalleryItem'
 
 export const GalleryBlock: React.FC<GalleryBlockType> = ({ anchorId, images }) => {
-  if (!images || images.length === 0) return null
-
-  // Ensure enough images for a smooth infinite loop (prevents gap at the end)
-  let displayImages = [...images]
-  while (displayImages.length < 10) {
-    displayImages = [...displayImages, ...images]
-  }
-
   const containerRef = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
 
@@ -64,6 +56,15 @@ export const GalleryBlock: React.FC<GalleryBlockType> = ({ anchorId, images }) =
 
     x.set(currentX)
   })
+
+  // Hooks above must run on every render, so the empty check comes after them
+  if (!images || images.length === 0) return null
+
+  // Ensure enough images for a smooth infinite loop (prevents gap at the end)
+  let displayImages = [...images]
+  while (displayImages.length < 10) {
+    displayImages = [...displayImages, ...images]
+  }
 
   // A cluster of gallery items with 10px gap
   // Add pr-[10px] so when the second cluster follows there's a 10px gap at the boundary

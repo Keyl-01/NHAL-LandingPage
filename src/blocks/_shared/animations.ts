@@ -1,4 +1,4 @@
-import type { Transition, Variants } from 'framer-motion'
+import type { Transition } from 'framer-motion'
 
 export const SECTION_SPRING_TRANSITION: Transition = {
   type: 'spring',

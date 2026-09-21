@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef } from 'react'
-import { motion, useTransform, useSpring } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import type { ServiceBlock } from '@/payload-types'
 import { ImageCard } from '../ImageCard'

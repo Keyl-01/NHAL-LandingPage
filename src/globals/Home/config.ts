@@ -28,14 +28,14 @@ export const Home: GlobalConfig = {
   label: 'Home',
   admin: {
     livePreview: {
-      url: ({ data, req }) =>
+      url: ({ req }) =>
         generatePreviewPath({
           slug: 'home',
           global: 'home',
           req,
         }),
     },
-    preview: (data, { req }) =>
+    preview: (_data, { req }) =>
       generatePreviewPath({
         slug: 'home',
         global: 'home',

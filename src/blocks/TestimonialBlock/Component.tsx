@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import type { TestimonialBlock as TestimonialBlockProps } from '@/payload-types'
 import { cn } from '@/utilities/ui'
@@ -21,8 +21,6 @@ const SPRING_CONFIG = { stiffness: 300, damping: 40, mass: 1 }
 
 const INACTIVE_OPACITY = 0.5
 const INACTIVE_SCALE = 0.7
-
-const MD_BREAKPOINT = 768
 
 // ─── Testimonial Slide ───────────────────────────────────────────────────────
 
