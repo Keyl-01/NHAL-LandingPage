@@ -1,20 +1,30 @@
+# Local development: only Postgres; run the app with `pnpm dev`.
+#   docker compose -f docker-compose.dev.yml up -d
+# Reads POSTGRES_* from .env; keep DATABASE_URL in .env in sync with them.
+# Postgres only applies the password when the volume is first created.
+
+# Own project name so it never shares containers with the production stack (docker-compose.yml)
+name: nhal-dev
+
 services:
   postgres:
     image: postgres:17-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_USER: payload
-      POSTGRES_PASSWORD: demo
-      POSTGRES_DB: nhal
+      POSTGRES_USER: ${POSTGRES_USER:-payload}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+      POSTGRES_DB: ${POSTGRES_DB:-nhal}
     volumes:
       - pgdata_dev:/var/lib/postgresql/data
     ports:
-      - '127.0.0.1:5432:5432'
+      - '127.0.0.1:${POSTGRES_PORT:-5432}:5432'
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U payload -d nhal']
+      test: ['CMD-SHELL', 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
       interval: 10s
       timeout: 5s
       retries: 5
 
 volumes:
   pgdata_dev:
+    # Fixed name keeps the existing dev data from before the project was renamed
+    name: nhal-landingpage_pgdata_dev
