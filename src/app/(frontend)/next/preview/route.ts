@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 
 import configPromise from '@payload-config'
+import { getSafeRedirectPath } from '@/utilities/getSafeRedirectPath'
 
 export type PreviewSearchParams = {
   path: string
@@ -13,14 +14,13 @@ export type PreviewSearchParams = {
 }
 
 export async function GET(req: NextRequest): Promise<Response> {
-  const payload = await getPayload({ config: configPromise })
-
   const { searchParams } = new URL(req.url)
 
   const path = searchParams.get('path')
   const previewSecret = searchParams.get('previewSecret')
 
-  if (previewSecret !== process.env.PREVIEW_SECRET) {
+  // An unset PREVIEW_SECRET must never match a missing param
+  if (!process.env.PREVIEW_SECRET || previewSecret !== process.env.PREVIEW_SECRET) {
     return new Response('You are not allowed to preview this page', { status: 403 })
   }
 
@@ -28,9 +28,14 @@ export async function GET(req: NextRequest): Promise<Response> {
     return new Response('Insufficient search params', { status: 404 })
   }
 
-  if (!path.startsWith('/')) {
-    return new Response('This endpoint can only be used for relative previews', { status: 500 })
+  // Only same-origin paths, so this endpoint can't be used as an open redirect
+  const safePath = getSafeRedirectPath(path)
+
+  if (!safePath) {
+    return new Response('This endpoint can only be used for relative previews', { status: 400 })
   }
+
+  const payload = await getPayload({ config: configPromise })
 
   let user
 
@@ -56,5 +61,5 @@ export async function GET(req: NextRequest): Promise<Response> {
 
   draft.enable()
 
-  redirect(path)
+  redirect(safePath)
 }
