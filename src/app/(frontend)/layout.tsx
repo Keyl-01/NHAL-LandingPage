@@ -1,10 +1,27 @@
 import type { Metadata } from 'next'
+import { Allura, Inter } from 'next/font/google'
 import React from 'react'
 
 import './globals.css'
 import { Background } from '@/components/Background'
 import { getServerSideURL } from '@/utilities/getURL'
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from '@/utilities/siteMeta'
+
+// Self-hosted and preloaded by Next; exposed as CSS variables used in globals.css
+const inter = Inter({
+  subsets: ['latin', 'vietnamese'],
+  style: ['normal', 'italic'],
+  axes: ['opsz'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const allura = Allura({
+  weight: '400',
+  subsets: ['latin', 'vietnamese'],
+  variable: '--font-allura',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   // Makes relative OG image URLs (e.g. /api/media/file/...) absolute
@@ -17,15 +34,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="vi">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="vi" className={`${inter.variable} ${allura.variable}`}>
       <body>
         <main>
           <Background />

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
@@ -39,7 +38,7 @@
   font-display: swap;
 }
 
-/* Allura — Script/handwriting font (loaded from Google Fonts) */
+/* Inter & Allura are self-hosted via next/font in layout.tsx (--font-inter, --font-allura) */
 
 /* ============================================
    CSS CUSTOM PROPERTIES (Design Tokens)
@@ -48,9 +47,9 @@
 :root {
   /* Font families */
   --font-family-heading: 'SVN-Yipes Regular', 'SVN-Yipes Regular Placeholder', sans-serif;
-  --font-family-body: 'Inter', sans-serif;
+  --font-family-body: var(--font-inter), 'Inter', sans-serif;
   --font-family-backquote: Satoshi, 'Satoshi Placeholder', sans-serif;
-  --font-family-script: 'Allura', sans-serif;
+  --font-family-script: var(--font-allura), 'Allura', sans-serif;
 
   /* NHAL Brand Colors */
   --nhal-red: #6e1313;
