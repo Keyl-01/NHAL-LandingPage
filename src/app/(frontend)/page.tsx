@@ -6,6 +6,9 @@ import { LivePreviewListener } from '@/components/LivePreviewListener'
 
 // import './styles.css'
 
+// Render per request: content comes from the DB, which isn't reachable during `docker build`
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   const { isEnabled: draft } = await draftMode()
   const payload = await getPayload({ config: configPromise })

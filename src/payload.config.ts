@@ -9,6 +9,7 @@ import { Media } from './collections/Media'
 import { Home } from './globals/Home/config'
 import { plugins } from './plugins'
 import { defaultLexical } from './fields/defaultLexical'
+import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -76,6 +77,9 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
     },
+    // Schema push only runs in dev; in production (NODE_ENV=production) pending
+    // migrations are applied automatically when the server boots.
+    prodMigrations: migrations,
   }),
   sharp,
 })

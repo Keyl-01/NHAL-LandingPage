@@ -7,6 +7,8 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  // Required by the Dockerfile: bundles a minimal server into .next/standalone
+  output: 'standalone',
   images: {
     qualities: [75, 100],
     localPatterns: [
