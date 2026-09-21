@@ -1,82 +1,267 @@
-# Payload Blank Template
+# NHAL Landing Page
 
-This template comes configured with the bare minimum to get started on anything you need.
+Landing page for **Ngày Hội An Lạc – Healing Day**, a series of free mental-health support events initiated by Dr. Lê Nguyên Phương and a community of learners.
 
-## Quick start
+The site is a single page whose content is fully editable from a CMS. It is built with [Payload CMS 3](https://payloadcms.com) running inside a [Next.js](https://nextjs.org) app, backed by PostgreSQL.
 
-## Quick Start - local setup
+## Table of contents
 
-To spin up this template locally, follow these steps:
+- [Tech stack](#tech-stack)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Getting started](#getting-started)
+- [Environment variables](#environment-variables)
+- [Available scripts](#available-scripts)
+- [Project structure](#project-structure)
+- [Content model](#content-model)
+- [Database migrations](#database-migrations)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Operations](#operations)
+- [License](#license)
 
-### Clone
+## Tech stack
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+| Area      | Technology                                                        |
+| --------- | ----------------------------------------------------------------- |
+| Framework | Next.js 16 (App Router, standalone output), React 19              |
+| CMS       | Payload CMS 3 (admin panel, REST and GraphQL APIs, live preview)  |
+| Database  | PostgreSQL 17 via `@payloadcms/db-postgres`                       |
+| Styling   | Tailwind CSS 4, shadcn/ui (Radix UI), SCSS modules, Framer Motion |
+| Editor    | Lexical rich text                                                 |
+| Testing   | Vitest (integration), Playwright (end-to-end)                     |
+| Tooling   | TypeScript, ESLint, Prettier, pnpm                                |
+| Runtime   | Node.js 22, Docker / Docker Compose                               |
 
-### Development
+## Features
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. For a local database run `docker compose up -d postgres` (uses the `POSTGRES_*` values).
+- **Block-based page builder**: the home page is a Payload global made of reorderable blocks (hero, about, services, testimonials, gallery, sponsors, and more).
+- **Drafts, autosave, and scheduled publishing** with live preview at mobile, tablet, and desktop breakpoints.
+- **SEO fields** (title, description, Open Graph image) via `@payloadcms/plugin-seo`, with sensible defaults.
+- **Image uploads** with focal point, resizing, and folders, processed by `sharp`.
+- **First admin bootstrap**: an admin user is created from environment variables on first boot.
+- **Transactional email** over SMTP (for example, password reset), falling back to console logging when SMTP is not configured.
+- **Production-ready Docker setup**: multi-stage image, automatic migrations on boot, health check, and log rotation.
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+## Prerequisites
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+- [Node.js](https://nodejs.org) **22 or later**
+- [pnpm](https://pnpm.io) **11.24.0** (the version pinned in `package.json`; run `corepack enable` to use it automatically)
+- [Docker](https://docs.docker.com/get-docker/) with Docker Compose, for the local PostgreSQL database
 
-## How it works
+## Getting started
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+1. **Clone the repository**
 
-### Collections
+   ```bash
+   git clone git@github.com:Keyl-01/NHAL-LandingPage.git
+   cd NHAL-LandingPage
+   ```
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+2. **Configure the environment**
 
-- #### Users (Authentication)
+   ```bash
+   cp .env.example .env
+   ```
 
-  Users are auth-enabled collections that have access to the admin panel.
+   Set at least `PAYLOAD_SECRET` and `PREVIEW_SECRET` (generate each with `openssl rand -hex 32`). To have an admin account created for you, also set `PAYLOAD_ADMIN_EMAIL` and `PAYLOAD_ADMIN_PASSWORD`. See [Environment variables](#environment-variables).
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/3.x/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+3. **Start PostgreSQL**
 
-- #### Media
+   ```bash
+   docker compose -f docker-compose.dev.yml up -d
+   ```
 
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+   This starts only the database, on `127.0.0.1:5432`, using the `POSTGRES_*` values from `.env`. Keep `DATABASE_URL` in sync with them.
 
-## Deploy (VPS, Docker Compose)
+4. **Install dependencies and start the dev server**
 
-Stack: `payload` (Next.js standalone image) + `postgres:17` + optional `pgadmin` (profile `tools`).
+   ```bash
+   pnpm install
+   pnpm dev
+   ```
 
-1. On the server: `cp .env.example .env`, then fill in `PAYLOAD_SECRET`, `PREVIEW_SECRET` (`openssl rand -hex 32`), `NEXT_PUBLIC_SERVER_URL`, `POSTGRES_*` and the first-admin `PAYLOAD_ADMIN_*`.
-2. `docker compose up -d --build`
-   - Pending migrations in `src/migrations` run automatically on boot (`prodMigrations`).
-   - Uploads are stored in the `media` volume (`/app/media`).
-3. Put a reverse proxy with TLS (Caddy/Nginx) in front of `127.0.0.1:3000`.
+5. **Open the app**
 
-### Schema changes
+   - Website: <http://localhost:3000>
+   - Admin panel: <http://localhost:3000/admin>
 
-Production never auto-pushes the schema. After changing collections/globals/blocks:
+   If you did not set `PAYLOAD_ADMIN_*`, the admin panel will ask you to create the first user.
 
-```bash
-pnpm migrate:create <name>   # against a DB that matches the previous migration
+In development, Payload pushes schema changes to the database automatically, and changes in `src/` are hot-reloaded. Uploaded files are stored in `public/media/`, which is git-ignored.
+
+## Environment variables
+
+All variables are documented in [`.env.example`](.env.example).
+
+| Variable                                            | Required | Description                                                                                                                              |
+| --------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `DATABASE_URL`                                      | Dev only | PostgreSQL connection string for `pnpm dev`. Docker Compose builds it from the `POSTGRES_*` values in production.                        |
+| `PAYLOAD_SECRET`                                    | Yes      | Secret used to sign auth tokens.                                                                                                         |
+| `PREVIEW_SECRET`                                    | Yes      | Secret that protects the draft preview route.                                                                                            |
+| `NEXT_PUBLIC_SERVER_URL`                            | Yes      | Public site URL, without a trailing slash. It is inlined into the client bundle at build time, so rebuild after changing it.             |
+| `PAYLOAD_ADMIN_EMAIL`, `PAYLOAD_ADMIN_PASSWORD`     | No       | Creates the first admin user on boot, only when the `users` table is empty. Remove them from the server `.env` after the first start.    |
+| `PAYLOAD_ADMIN_NAME`                                | No       | Display name of that admin user. Defaults to `Admin`.                                                                                    |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`  | No       | SMTP server for outgoing email. Leave `SMTP_HOST` empty to log emails to the console. Port `465` uses implicit TLS; `587` uses STARTTLS. |
+| `SMTP_FROM_ADDRESS`, `SMTP_FROM_NAME`               | No       | Sender address and name.                                                                                                                 |
+| `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` | Yes      | Credentials of the PostgreSQL container. The password is only applied when the data volume is first created.                             |
+| `POSTGRES_PORT`, `APP_PORT`, `PGADMIN_PORT`         | No       | Host ports, bound to `127.0.0.1` only. Default to `5432`, `3000`, and `5050`.                                                            |
+| `PGADMIN_EMAIL`, `PGADMIN_PASSWORD`                 | pgAdmin  | Login for the optional pgAdmin service.                                                                                                  |
+
+## Available scripts
+
+| Command                      | Description                                                 |
+| ---------------------------- | ----------------------------------------------------------- |
+| `pnpm dev`                   | Start the development server.                               |
+| `pnpm devsafe`               | Clear the `.next` cache, then start the development server. |
+| `pnpm build`                 | Create a production build.                                  |
+| `pnpm start`                 | Serve the production build.                                 |
+| `pnpm lint`                  | Run ESLint.                                                 |
+| `pnpm test`                  | Run integration tests, then end-to-end tests.               |
+| `pnpm test:int`              | Run Vitest integration tests.                               |
+| `pnpm test:e2e`              | Run Playwright end-to-end tests.                            |
+| `pnpm generate:types`        | Regenerate `src/payload-types.ts` from the Payload config.  |
+| `pnpm generate:importmap`    | Regenerate the admin panel import map.                      |
+| `pnpm migrate`               | Apply pending database migrations.                          |
+| `pnpm migrate:create <name>` | Create a migration from the current schema.                 |
+| `pnpm migrate:status`        | Show which migrations have been applied.                    |
+
+Run `pnpm generate:types` after changing any collection, global, or block config, and `pnpm generate:importmap` after adding custom admin components.
+
+## Project structure
+
+```text
+.
+├── docker/                    # Container config (pgAdmin server list)
+├── public/                    # Static assets: favicons, fonts, local media uploads
+├── src/
+│   ├── access/                # Payload access-control functions
+│   ├── app/
+│   │   ├── (frontend)/        # Public website (home page, preview routes)
+│   │   └── (payload)/         # Admin panel, REST and GraphQL API routes
+│   ├── blocks/                # Page-builder blocks (config.ts + Component.tsx each)
+│   ├── collections/           # Payload collections (Users, Media)
+│   ├── components/            # Shared React components and shadcn/ui primitives
+│   ├── fields/                # Shared field config (Lexical editor)
+│   ├── globals/Home/          # Home page global and its default layout
+│   ├── hooks/                 # Payload hooks and React hooks
+│   ├── migrations/            # Database migrations (applied on production boot)
+│   ├── plugins/               # Payload plugins (SEO)
+│   ├── utilities/             # Helper functions
+│   ├── payload.config.ts      # Payload configuration
+│   └── payload-types.ts       # Generated types; do not edit by hand
+├── tests/
+│   ├── e2e/                   # Playwright tests
+│   └── int/                   # Vitest tests
+├── docker-compose.yml         # Production stack: app, PostgreSQL, optional pgAdmin
+├── docker-compose.dev.yml     # Local development: PostgreSQL only
+└── Dockerfile                 # Multi-stage production image
 ```
 
-Commit the generated files in `src/migrations`, then redeploy.
+## Content model
 
-### Inspecting the database (pgAdmin)
+| Type       | Slug    | Purpose                                                                                    |
+| ---------- | ------- | ------------------------------------------------------------------------------------------ |
+| Collection | `users` | Admin users with access to the admin panel.                                                |
+| Collection | `media` | Public image and video uploads, with alt text, caption, focal point, and folders.          |
+| Global     | `home`  | The landing page: a `layout` of blocks, plus an SEO tab. Supports drafts and live preview. |
+
+Blocks available in the `home` layout (in `src/blocks/`):
+
+`Banner`, `Hero`, `About`, `Benefit`, `Service`, `Methodology`, `Archive`, `Testimonial`, `Gallery`, `Sponsor`, `Footer`, `NavFlyout`.
+
+The site serves only the home page at `/`; any other path returns 404. When the SEO tab is empty, the title and description fall back to the defaults in `src/utilities/siteMeta.ts`.
+
+## Database migrations
+
+Development uses Payload's automatic schema push. **Production never pushes the schema**: it only applies the migrations in `src/migrations/`, which run automatically when the server starts.
+
+After changing a collection, global, or block:
+
+```bash
+# Run against a database whose schema matches the latest existing migration
+pnpm migrate:create <descriptive-name>
+```
+
+Review and commit the generated files in `src/migrations/`, then redeploy.
+
+## Testing
+
+Both test suites need a running database configured in `.env`.
+
+```bash
+pnpm test:int   # Vitest integration tests (tests/int)
+pnpm test:e2e   # Playwright end-to-end tests (tests/e2e)
+```
+
+The end-to-end suite starts `pnpm dev` automatically, or reuses a server already running on port 3000. Before the first run, install the browser with `pnpm exec playwright install chromium`. The admin tests create a test user (`dev@payloadcms.com`), so do not run them against a production database.
+
+## Deployment
+
+The production stack runs on a single VPS with Docker Compose:
+
+- `payload`: the Next.js standalone image built from the `Dockerfile`
+- `postgres`: `postgres:17-alpine`
+- `pgadmin`: optional, enabled with the `tools` profile
+
+1. **Configure the environment** on the server:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Fill in `PAYLOAD_SECRET`, `PREVIEW_SECRET`, `NEXT_PUBLIC_SERVER_URL` (your public domain), the `POSTGRES_*` values with a strong password, and optionally `PAYLOAD_ADMIN_*` and `SMTP_*`. `DATABASE_URL` is not used here.
+
+2. **Build and start** the stack:
+
+   ```bash
+   docker compose up -d --build
+   ```
+
+   - Pending migrations run automatically on boot.
+   - Uploads are stored in the `media` volume, mounted at `/app/media`.
+   - Container logs are rotated (3 × 10 MB per service).
+
+3. **Put a reverse proxy with TLS** (for example, Caddy or Nginx) in front of `127.0.0.1:3000`. All ports are bound to localhost and are never exposed publicly.
+
+To deploy a new version, pull the latest code and run `docker compose up -d --build` again.
+
+## Operations
+
+### Inspecting the database
+
+pgAdmin is disabled by default. Start it only when needed and reach it through an SSH tunnel:
 
 ```bash
 docker compose --profile tools up -d pgadmin
-ssh -L 5050:127.0.0.1:5050 user@your-vps   # then open http://localhost:5050
-docker compose stop pgadmin                # when done
+ssh -L 5050:127.0.0.1:5050 user@your-server   # then open http://localhost:5050
+docker compose stop pgadmin                    # when done
 ```
 
-Postgres itself is published on `127.0.0.1:5432` only — use an SSH tunnel for DBeaver/psql.
+PostgreSQL itself listens on `127.0.0.1:5432` only. Use an SSH tunnel to connect with tools such as DBeaver or `psql`.
 
-### Backup
+### Backup and restore
+
+Back up the database and the uploaded media:
 
 ```bash
-docker compose exec -T postgres pg_dump -U payload -Fc nhal > backup.dump
-docker run --rm -v <project>_media:/m -v "$PWD":/b alpine tar czf /b/media.tgz -C /m .
+# Load POSTGRES_USER and POSTGRES_DB into the shell
+set -a; . ./.env; set +a
+
+# Database
+docker compose exec -T postgres pg_dump -U "$POSTGRES_USER" -Fc "$POSTGRES_DB" > backup.dump
+
+# Media (the volume is named <project>_media; list volumes with `docker volume ls`)
+docker run --rm -v nhal-landingpage_media:/m -v "$PWD":/b alpine tar czf /b/media.tgz -C /m .
 ```
 
-## Questions
+Restore:
 
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+```bash
+docker compose exec -T postgres pg_restore -U "$POSTGRES_USER" -d "$POSTGRES_DB" --clean --if-exists < backup.dump
+docker run --rm -v nhal-landingpage_media:/m -v "$PWD":/b alpine tar xzf /b/media.tgz -C /m
+```
+
+## License
+
+Released under the [MIT License](LICENSE).
