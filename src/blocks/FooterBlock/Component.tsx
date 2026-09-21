@@ -11,7 +11,7 @@ import { Media } from '@/components/Media'
 export const FooterBlock: React.FC<FooterBlockType> = ({ anchorId, description, socialLinks }) => {
   return (
     <motion.footer
-      id={anchorId || "nhal-footer-section"}
+      id={anchorId || 'nhal-footer-section'}
       className="relative flex w-full overflow-hidden"
       initial={{ opacity: 0, y: 96 }}
       animate={{ opacity: 1, y: 0 }}
@@ -27,7 +27,7 @@ export const FooterBlock: React.FC<FooterBlockType> = ({ anchorId, description, 
     >
       <div
         className={cn(
-          'flex w-full flex-col items-center gap-[32px] pt-[64px] px-[16px] pb-[96px] z-10',
+          'flex w-full flex-col items-center gap-[32px] pt-[64px] px-[16px] pb-[96px] z-2',
           'md:py-[96px]',
         )}
       >
