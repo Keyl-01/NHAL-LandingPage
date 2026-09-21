@@ -1,12 +1,16 @@
+import type { Metadata } from 'next'
 import React from 'react'
 
 import './globals.css'
 import { Background } from '@/components/Background'
+import { getServerSideURL } from '@/utilities/getURL'
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from '@/utilities/siteMeta'
 
-export const metadata = {
-  title: 'Ngày Hội An Lạc - Healing Day',
-  description:
-    'Ngày Hội An Lạc - Healing Day được khởi xướng và tổ chức bởi TS Lê Nguyên Phương và cộng đồng học viên. Đây là chuỗi sự kiện hỗ trợ tâm lý miễn phí dành cho những người đang gặp các khó khăn về sức khỏe tinh thần.',
+export const metadata: Metadata = {
+  // Makes relative OG image URLs (e.g. /api/media/file/...) absolute
+  metadataBase: new URL(getServerSideURL()),
+  title: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

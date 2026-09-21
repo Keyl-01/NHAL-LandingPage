@@ -2,16 +2,12 @@ import { Plugin } from 'payload'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { getServerSideURL } from '@/utilities/getURL'
+import { DEFAULT_TITLE } from '@/utilities/siteMeta'
 
-const generateTitle: GenerateTitle<any> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Ngày Hội An Lạc` : 'Ngày Hội An Lạc'
-}
+// The Home global has no title/slug field and lives at '/'
+const generateTitle: GenerateTitle = () => DEFAULT_TITLE
 
-const generateURL: GenerateURL<any> = ({ doc }) => {
-  const url = getServerSideURL()
-
-  return doc?.slug ? `${url}/${doc.slug}` : url
-}
+const generateURL: GenerateURL = () => getServerSideURL()
 
 export const plugins: Plugin[] = [
   seoPlugin({
