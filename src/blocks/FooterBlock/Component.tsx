@@ -23,14 +23,20 @@ export const FooterBlock: React.FC<FooterBlockType> = ({ anchorId, description, 
         )}
       >
         <RichText
-          className="w-full max-w-[420px] leading-[24px] text-nhal-dark text-center whitespace-pre-wrap break-words"
+          className="w-full max-w-[420px] text-[22px] leading-[24px] text-nhal-dark text-center whitespace-pre-wrap break-words"
           converters={jsxConverters}
           data={description}
         />
         <div className="flex w-full flex-col items-center gap-[32px]">
           <div className="flex w-full justify-center items-center gap-[16px] py-[19px]">
             {socialLinks?.map((link) => (
-              <Link key={link?.id} href={link?.link || '#'} target="_blank">
+              <Link
+                key={link?.id}
+                href={link?.link || '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link?.name || undefined}
+              >
                 {link?.icon && (
                   <Media
                     className="size-[60px]"

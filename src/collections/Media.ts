@@ -36,7 +36,6 @@ export const Media: CollectionConfig = {
   upload: {
     // MEDIA_DIR is set in the Docker image (mounted as a volume); local dev falls back to public/media
     staticDir: process.env.MEDIA_DIR || path.resolve(dirname, '../../public/media'),
-    adminThumbnail: 'thumbnail',
     focalPoint: true,
   },
 }
