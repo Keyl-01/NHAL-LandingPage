@@ -28,6 +28,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
   title: DEFAULT_TITLE,
   description: DEFAULT_DESCRIPTION,
+  icons: {
+    icon: [
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-192x192.png', type: 'image/png', sizes: '192x192' },
+    ],
+    apple: { url: '/apple-icon.png', sizes: '180x180' },
+  },
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
