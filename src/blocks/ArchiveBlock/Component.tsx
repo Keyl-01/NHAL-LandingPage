@@ -6,12 +6,7 @@ import { motion, Transition } from 'framer-motion'
 import { cn } from '@/utilities/ui'
 import { jsxConverters } from '@/utilities/lexicalConverters'
 import Link from 'next/link'
-
-const SECTION_ENTRANCE = {
-  initial: { opacity: 0, y: 96 },
-  animate: { opacity: 1, y: 0 },
-  transition: { type: 'spring', stiffness: 400, damping: 30, mass: 1, delay: 0.6 } as const,
-}
+import { SECTION_ENTRANCE } from '../_shared/animations'
 
 const SPRING_TRANSITION: Transition = {
   type: 'spring',
@@ -29,7 +24,7 @@ export const ArchiveBlock: React.FC<ArchiveBlockProp> = ({
 }) => {
   return (
     <motion.section
-      id={anchorId || "nhal-archive-section"}
+      id={anchorId || 'nhal-archive-section'}
       className="relative flex w-full justify-center overflow-x-clip"
       {...SECTION_ENTRANCE}
     >

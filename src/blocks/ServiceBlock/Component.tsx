@@ -5,6 +5,7 @@ import type { ServiceBlock as ServiceBlockProps } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { ImageWrapper } from './components/ImageWrapper'
 import { ServiceCard } from './components/ServiceCard'
+import { SECTION_ENTRANCE } from '../_shared/animations'
 
 export const ServiceBlock: React.FC<ServiceBlockProps> = ({
   anchorId,
@@ -14,17 +15,9 @@ export const ServiceBlock: React.FC<ServiceBlockProps> = ({
 }) => {
   return (
     <motion.section
-      id={anchorId || "nhal-service-section"}
+      id={anchorId || 'nhal-service-section'}
       className="flex justify-center items-center w-full"
-      initial={{ opacity: 0, y: 96 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        type: 'spring',
-        stiffness: 400,
-        damping: 30,
-        mass: 1,
-        delay: 0.6,
-      }}
+      {...SECTION_ENTRANCE}
     >
       <div
         className="

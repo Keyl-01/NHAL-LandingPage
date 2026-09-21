@@ -57,13 +57,7 @@ export const Hero: React.FC<HeroProps> = ({
         className="flex md:-mt-1"
         initial={{ opacity: 0, y: 96 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{
-          type: 'spring',
-          stiffness: 400,
-          damping: 30,
-          mass: 1,
-          delay: 0.5,
-        }}
+        transition={{ type: 'spring', stiffness: 400, damping: 30, mass: 1, delay: 0.5 }}
       >
         {primaryCta?.label && (
           <Link

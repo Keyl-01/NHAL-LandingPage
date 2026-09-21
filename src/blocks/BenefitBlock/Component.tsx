@@ -6,21 +6,14 @@ import { motion } from 'framer-motion'
 import type { BenefitBlock as BenefitBlockProps } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { BenefitWrapper } from './components/BenefitWrapper'
+import { SECTION_ENTRANCE } from '../_shared/animations'
 
 export const BenefitBlock: React.FC<BenefitBlockProps> = ({ anchorId, heading, benefitWrappers }) => {
   return (
     <motion.section
-      id={anchorId || "nhal-benefit-section"}
+      id={anchorId || 'nhal-benefit-section'}
       className="flex justify-center items-center w-full"
-      initial={{ opacity: 0, y: 96 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        type: 'spring',
-        stiffness: 400,
-        damping: 30,
-        mass: 1,
-        delay: 0.6,
-      }}
+      {...SECTION_ENTRANCE}
     >
       <div className="flex flex-col w-full items-center max-w-[1200px] gap-[50px] px-[16px] py-[64px] md:py-[98px] md:px-[24px] md:gap-[48px]">
         <RichText

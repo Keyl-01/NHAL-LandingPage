@@ -7,23 +7,14 @@ import { jsxConverters } from '@/utilities/lexicalConverters'
 import { cn } from '@/utilities/ui'
 import Link from 'next/link'
 import { Media } from '@/components/Media'
+import { SECTION_ENTRANCE } from '../_shared/animations'
 
 export const FooterBlock: React.FC<FooterBlockType> = ({ anchorId, description, socialLinks }) => {
   return (
     <motion.footer
       id={anchorId || 'nhal-footer-section'}
       className="relative flex w-full overflow-hidden"
-      initial={{ opacity: 0, y: 96 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        type: 'spring',
-        stiffness: 400,
-        damping: 30,
-        mass: 1,
-        delay: 0.6,
-        bounce: 0.2,
-        timeConstant: 400,
-      }}
+      {...SECTION_ENTRANCE}
     >
       <div
         className={cn(

@@ -25,7 +25,7 @@ GalleryItem.displayName = 'GalleryItem'
 export const GalleryBlock: React.FC<GalleryBlockType> = ({ anchorId, images }) => {
   if (!images || images.length === 0) return null
 
-  // Đảm bảo có đủ số lượng ảnh để chạy vòng lặp mượt mà (slider không bị hụt ở đuôi)
+  // Ensure enough images for a smooth infinite loop (prevents gap at the end)
   let displayImages = [...images]
   while (displayImages.length < 10) {
     displayImages = [...displayImages, ...images]
@@ -34,7 +34,7 @@ export const GalleryBlock: React.FC<GalleryBlockType> = ({ anchorId, images }) =
   const containerRef = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
 
-  // Tốc độ mặc định chạy sang trái (âm là sang trái)
+  // Default speed moving left (negative is left)
   const baseVelocity = -1
   const [isHovered, setIsHovered] = useState(false)
   const velocityFactor = useRef(1)
@@ -43,19 +43,19 @@ export const GalleryBlock: React.FC<GalleryBlockType> = ({ anchorId, images }) =
     if (!containerRef.current) return
     const container = containerRef.current
 
-    // Vì ta render 2 cụm content y hệt nhau, chia đôi scrollWidth sẽ ra chiều rộng của 1 cụm
+    // Since we render 2 identical content blocks, half the scrollWidth is the width of one block
     const scrollWidth = container.scrollWidth / 2
 
-    // Target velocity: 0.5x khi hover, 1x khi bình thường
+    // Target velocity: 0.5x when hovered, 1x when normal
     const targetVelocity = isHovered ? 0.5 : 1
-    // Làm mượt sự thay đổi tốc độ
+    // Smooth out velocity changes
     velocityFactor.current += (targetVelocity - velocityFactor.current) * 0.1
 
-    // Tính toán quãng đường di chuyển mỗi frame
+    // Calculate distance moved per frame
     const moveBy = baseVelocity * velocityFactor.current * (delta / 16.666)
 
     let currentX = x.get() + moveBy
-    // Nếu chạy hết 1 cụm thì reset vị trí về đầu để tạo cảm giác chạy vô tận
+    // If one block finishes scrolling, reset position to start to create infinite loop effect
     if (currentX <= -scrollWidth) {
       currentX += scrollWidth
     } else if (currentX >= 0) {
@@ -65,8 +65,8 @@ export const GalleryBlock: React.FC<GalleryBlockType> = ({ anchorId, images }) =
     x.set(currentX)
   })
 
-  // Một cụm gallery item với gap 10px
-  // Thêm pr-[10px] để khi cụm thứ 2 nối tiếp vào cũng có khoảng cách 10px ở ranh giới
+  // A cluster of gallery items with 10px gap
+  // Add pr-[10px] so when the second cluster follows there's a 10px gap at the boundary
   const content = (
     <div className="flex shrink-0 items-center gap-[10px] pr-[10px]">
       {displayImages.map((imageItem, index) => (
@@ -77,7 +77,7 @@ export const GalleryBlock: React.FC<GalleryBlockType> = ({ anchorId, images }) =
 
   return (
     <section
-      id={anchorId || "nhal-gallery-section"}
+      id={anchorId || 'nhal-gallery-section'}
       className="flex w-full flex-col items-center justify-center overflow-hidden"
     >
       <div

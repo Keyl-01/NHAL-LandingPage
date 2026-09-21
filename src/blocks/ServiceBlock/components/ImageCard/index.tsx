@@ -10,9 +10,9 @@ type ImageCardProps = {
 const getClassName = (count: number) => {
   const rotations = {
     1: '-rotate-[10deg]',
-    2: '-rotate-[5deg] pb-0 md:pb-[48px] z-10',
-    3: 'rotate-[0deg] pb-0 md:pb-[96px] z-20',
-    4: 'rotate-[5deg] pb-0 md:pb-[48px] z-10',
+    2: '-rotate-[5deg] pb-0 md:pb-[48px] z-2',
+    3: 'rotate-[0deg] pb-0 md:pb-[96px] z-3',
+    4: 'rotate-[5deg] pb-0 md:pb-[48px] z-2',
     5: 'rotate-[10deg]',
   }
   return rotations[count as keyof typeof rotations]
