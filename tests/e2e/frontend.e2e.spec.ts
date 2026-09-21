@@ -1,20 +1,24 @@
-import { test, expect, Page } from '@playwright/test'
+import { test, expect } from '@playwright/test'
+
+const serverURL = 'http://localhost:3000'
 
 test.describe('Frontend', () => {
-  let page: Page
+  test('renders the homepage', async ({ page }) => {
+    await page.goto(serverURL)
 
-  test.beforeAll(async ({ browser }, testInfo) => {
-    const context = await browser.newContext()
-    page = await context.newPage()
+    await expect(page).toHaveTitle(/Ngày Hội An Lạc/)
+    await expect(page.locator('html')).toHaveAttribute('lang', 'vi')
   })
 
-  test('can go on homepage', async ({ page }) => {
-    await page.goto('http://localhost:3000')
+  test('returns 404 for unknown paths', async ({ request }) => {
+    const res = await request.get(`${serverURL}/khong-ton-tai`)
+    expect(res.status()).toBe(404)
+  })
 
-    await expect(page).toHaveTitle(/Payload Blank Template/)
-
-    const heading = page.locator('h1').first()
-
-    await expect(heading).toHaveText('Welcome to your new project.')
+  test('rejects preview without a valid secret', async ({ request }) => {
+    const res = await request.get(`${serverURL}/next/preview?path=/&previewSecret=wrong`, {
+      maxRedirects: 0,
+    })
+    expect(res.status()).toBe(403)
   })
 })

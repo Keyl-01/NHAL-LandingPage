@@ -17,4 +17,9 @@ describe('API', () => {
     })
     expect(users).toBeDefined()
   })
+
+  it('fetches the home global with a layout', async () => {
+    const home = await payload.findGlobal({ slug: 'home' })
+    expect(Array.isArray(home.layout)).toBe(true)
+  })
 })
