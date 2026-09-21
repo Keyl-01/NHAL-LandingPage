@@ -8,6 +8,12 @@ import {
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+import {
+  captureOriginalUpload,
+  keepOriginalFilesize,
+  restoreOriginalUpload,
+} from '@/hooks/preserveOriginalUpload'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -16,6 +22,11 @@ export const Media: CollectionConfig = {
   folders: true,
   access: {
     read: () => true,
+  },
+  hooks: {
+    beforeOperation: [captureOriginalUpload],
+    beforeChange: [keepOriginalFilesize],
+    afterChange: [restoreOriginalUpload],
   },
   fields: [
     {
